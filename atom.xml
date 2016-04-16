@@ -61,14 +61,49 @@
     <link href="http://braveli.tk/2015/02/25/ADNS-9500%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/"/>
     <id>http://braveli.tk/2015/02/25/ADNS-9500使用心得/</id>
     <published>2015-02-25T03:07:42.000Z</published>
-    <updated>2016-04-16T03:28:26.566Z</updated>
+    <updated>2016-04-16T06:05:08.623Z</updated>
     
-    <content type="html"></content>
+    <content type="html">&lt;hr&gt;
+&lt;p&gt;由于实验室的一个项目需要实现实时传输某物体的位移距离（二维平面内），通过考量各种传感器。考虑到这个情景和鼠标比较接近，所以去查了光电鼠标的工作原理，最终定下来使用原属Avago公司现属于PixArt公司的传感器ADNS-9500。整个关于ADNS-9500方面的开发主要集中在年前放假回家前的两周。发现网络上关于这个传感器的资料比较少，可能是因为功能比较小众吧，相关的开发人员比较少，既然我走过这条路了，就给后人留盏灯吧。在这里首先要谢谢PixArt公司深圳办事处黄工对我的帮助，谢谢回复我了一封邮件，也正是这封邮件才让我有可能在两周实现它的主体功能。好了言归正传，开始谈谈我们的开发过程。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;工作原理&quot;&gt;&lt;a href=&quot;#工作原理&quot; class=&quot;headerlink&quot; title=&quot;工作原理&quot;&gt;&lt;/a&gt;工作原理&lt;/h2&gt;&lt;p&gt;激光鼠标在原理上和光电鼠标类似，只不过用激光代替了普通的LED灯，好处是可以在更多表面上使用。因为激光是想干波，几乎是单一波长，即使经过长距离的传播依然能保持良好的强度和波形。激光鼠标传感器获得影像的过程是根据激光照射在物体表面所产生的干涉条纹而形成的光斑点反射到传感器上获得的。而传统的光学鼠标是通过照射粗糙的表面的表面所产生的阴影来获得。因此激光能对表面的图像产生更大的反差，从而使得“CMOS”成像传感器得到的图像更容易辨别，提高鼠标的定位精确性。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;开发环境&quot;&gt;&lt;a href=&quot;#开发环境&quot; class=&quot;headerlink&quot; title=&quot;开发环境&quot;&gt;&lt;/a&gt;开发环境&lt;/h2&gt;&lt;p&gt;MUC:C8051F410&lt;br&gt;IDE:Keil C51&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;工作流程&quot;&gt;&lt;a href=&quot;#工作流程&quot; class=&quot;headerlink&quot; title=&quot;工作流程&quot;&gt;&lt;/a&gt;工作流程&lt;/h2&gt;&lt;p&gt;主要参考ADNS-9500的datasheet来书写。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;向地址为0x3A的寄存器写入0x5A&lt;/li&gt;
+&lt;li&gt;做至少50ms的延时&lt;/li&gt;
+&lt;li&gt;从地址为0x02、0x03、0x04、0x05和0x06读取数据&lt;/li&gt;
+&lt;li&gt;SROM下载 &lt;ul&gt;
+&lt;li&gt;SROM下载首先在CONFIGURATION_IV_ADDR中选择SROM的size&lt;/li&gt;
+&lt;li&gt;向SROM_Enable寄存器写入0x1D&lt;/li&gt;
+&lt;li&gt;延时一个FRAME&lt;/li&gt;
+&lt;li&gt;向SROM_ENABLE寄存器写入0x18开始SROM下载&lt;/li&gt;
+&lt;li&gt;开始写入SROM时需药先从SROM_LOAD_BRUST寄存器开始写，这块我使用code变量将SROM的值存在了单片机的ROM里面，然后通过数组名字直接访问，从而避免使用EERPOM&lt;/li&gt;
+&lt;li&gt;再进行SROM_CHECK&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使能激光源，将LASER_CTRL0寄存器的最低位置为0&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;至此，ADNS-9500的初始化就全部完成了，下来就是典型的SPI操作，发送寄存器地址值，读取对应寄存器的值。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;闲话&quot;&gt;&lt;a href=&quot;#闲话&quot; class=&quot;headerlink&quot; title=&quot;闲话&quot;&gt;&lt;/a&gt;闲话&lt;/h2&gt;&lt;p&gt;回顾这个过程，当时才开始写代码的时候真是一筹莫展，写完之后回过头看看。觉得当时进展不顺是因为数据手册读的不够好的结果。&lt;/p&gt;
+&lt;p&gt;代码书写部分的心得，最好封装这样两个函数，一个是SPI操作的函数，一个是SPI操作sensor的函数，在每一次操作的时候都去置位一下NCS的值。这样封装，一来代码易读，并且也不太容易出错。&lt;/p&gt;
+&lt;p&gt;至于调试经验部分，我是用的串口打印获取到的坐标数据，在PC上利用串口调试助手来观测数据是否正确与否。&lt;/p&gt;
+&lt;p&gt;最后共享一份demo样例到我的&lt;a href=&quot;https://github.com/BraveRichard/ADNS-9500&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;gitbub&lt;/a&gt;，关于代码实现部分有什么问题可以给我发邮件，看到后我会及时回复的。&lt;/p&gt;
+</content>
     
     <summary type="html">
     
+      &lt;hr&gt;
+&lt;p&gt;由于实验室的一个项目需要实现实时传输某物体的位移距离（二维平面内），通过考量各种传感器。考虑到这个情景和鼠标比较接近，所以去查了光电鼠标的工作原理，最终定下来使用原属Avago公司现属于PixArt公司的传感器ADNS-9500。整个关于ADNS-9500方面的开发主要集中在年前放假回家前的两周。发现网络上关于这个传感器的资料比较少，可能是因为功能比较小众吧，相关的开发人员比较少，既然我走过这条路了，就给后人留盏灯吧。在这里首先要谢谢PixArt公司深圳办事处黄工对我的帮助，谢谢回复我了一封邮件，也正是这封邮件才让我有可能在两周实现它的主体功能。好了言归正传，开始谈谈我们的开发过程。&lt;br&gt;
+    
     </summary>
     
+    
+      <category term="硬件" scheme="http://braveli.tk/tags/%E7%A1%AC%E4%BB%B6/"/>
+    
+      <category term="专用芯片" scheme="http://braveli.tk/tags/%E4%B8%93%E7%94%A8%E8%8A%AF%E7%89%87/"/>
     
   </entry>
   
