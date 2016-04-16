@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://braveli.tk/2015/02/25/ADNS-9500使用心得/index.html">
 <meta property="og:site_name" content="Brave's Blog">
 <meta property="og:description" content="由于实验室的一个项目需要实现实时传输某物体的位移距离（二维平面内），通过考量各种传感器。考虑到这个情景和鼠标比较接近，所以去查了光电鼠标的工作原理，最终定下来使用原属Avago公司现属于PixArt公司的传感器ADNS-9500。整个关于ADNS-9500方面的开发主要集中在年前放假回家前的两周。发现网络上关于这个传感器的资料比较少，可能是因为功能比较小众吧，相关的开发人员比较少，既然我走过这条">
-<meta property="og:updated_time" content="2016-04-16T06:09:09.034Z">
+<meta property="og:updated_time" content="2016-04-16T08:11:29.734Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ADNS-9500使用心得">
 <meta name="twitter:description" content="由于实验室的一个项目需要实现实时传输某物体的位移距离（二维平面内），通过考量各种传感器。考虑到这个情景和鼠标比较接近，所以去查了光电鼠标的工作原理，最终定下来使用原属Avago公司现属于PixArt公司的传感器ADNS-9500。整个关于ADNS-9500方面的开发主要集中在年前放假回家前的两周。发现网络上关于这个传感器的资料比较少，可能是因为功能比较小众吧，相关的开发人员比较少，既然我走过这条">
@@ -241,7 +241,7 @@
 <li>向SROM_Enable寄存器写入0x1D</li>
 <li>延时一个FRAME</li>
 <li>向SROM_ENABLE寄存器写入0x18开始SROM下载</li>
-<li>开始写入SROM时需药先从SROM_LOAD_BRUST寄存器开始写，这块我使用code变量将SROM的值存在了单片机的ROM里面，然后通过数组名字直接访问，从而避免使用EERPOM</li>
+<li>开始写入SROM时需要先从SROM_LOAD_BRUST寄存器开始写，这块我使用code变量将SROM的值存在了单片机的ROM里面，然后通过数组名字直接访问，从而避免使用EERPOM</li>
 <li>再进行SROM_CHECK</li>
 </ul>
 </li>
