@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://braveli.tk/"/>
+  <link href="http://blog.bravel.com.cn/"/>
   <updated>2016-04-15T13:15:21.711Z</updated>
-  <id>http://braveli.tk/</id>
+  <id>http://blog.bravel.com.cn/</id>
   
   <author>
     <name>Brave</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>初识markdown</title>
-    <link href="http://braveli.tk/2016/04/15/%E5%88%9D%E8%AF%86markdown/"/>
-    <id>http://braveli.tk/2016/04/15/初识markdown/</id>
+    <link href="http://blog.bravel.com.cn/2016/04/15/%E5%88%9D%E8%AF%86markdown/"/>
+    <id>http://blog.bravel.com.cn/2016/04/15/初识markdown/</id>
     <published>2016-04-15T12:21:31.000Z</published>
     <updated>2016-04-15T13:15:21.711Z</updated>
     
@@ -34,14 +34,14 @@
     </summary>
     
     
-      <category term="markdown" scheme="http://braveli.tk/tags/markdown/"/>
+      <category term="markdown" scheme="http://blog.bravel.com.cn/tags/markdown/"/>
     
   </entry>
   
   <entry>
     <title>写好每一次提交的message</title>
-    <link href="http://braveli.tk/2016/04/15/%E5%86%99%E5%A5%BD%E6%AF%8F%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4%E7%9A%84message/"/>
-    <id>http://braveli.tk/2016/04/15/写好每一次提交的message/</id>
+    <link href="http://blog.bravel.com.cn/2016/04/15/%E5%86%99%E5%A5%BD%E6%AF%8F%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4%E7%9A%84message/"/>
+    <id>http://blog.bravel.com.cn/2016/04/15/写好每一次提交的message/</id>
     <published>2016-04-15T12:00:59.000Z</published>
     <updated>2016-04-15T12:20:58.275Z</updated>
     
@@ -52,14 +52,14 @@
     </summary>
     
     
-      <category term="git" scheme="http://braveli.tk/tags/git/"/>
+      <category term="git" scheme="http://blog.bravel.com.cn/tags/git/"/>
     
   </entry>
   
   <entry>
     <title>Brave谈谈阿里巴巴缩招了</title>
-    <link href="http://braveli.tk/2015/09/02/Brave%E8%B0%88%E8%B0%88%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E7%BC%A9%E6%8B%9B%E4%BA%86/"/>
-    <id>http://braveli.tk/2015/09/02/Brave谈谈阿里巴巴缩招了/</id>
+    <link href="http://blog.bravel.com.cn/2015/09/02/Brave%E8%B0%88%E8%B0%88%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E7%BC%A9%E6%8B%9B%E4%BA%86/"/>
+    <id>http://blog.bravel.com.cn/2015/09/02/Brave谈谈阿里巴巴缩招了/</id>
     <published>2015-09-02T03:33:38.000Z</published>
     <updated>2016-04-16T09:55:56.560Z</updated>
     
@@ -84,14 +84,14 @@
     </summary>
     
     
-      <category term="随笔" scheme="http://braveli.tk/tags/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://blog.bravel.com.cn/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
   <entry>
     <title>ADNS-9500使用心得</title>
-    <link href="http://braveli.tk/2015/02/25/ADNS-9500%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/"/>
-    <id>http://braveli.tk/2015/02/25/ADNS-9500使用心得/</id>
+    <link href="http://blog.bravel.com.cn/2015/02/25/ADNS-9500%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/"/>
+    <id>http://blog.bravel.com.cn/2015/02/25/ADNS-9500使用心得/</id>
     <published>2015-02-25T03:07:42.000Z</published>
     <updated>2016-04-19T08:43:43.304Z</updated>
     
@@ -130,9 +130,9 @@
     </summary>
     
     
-      <category term="硬件" scheme="http://braveli.tk/tags/%E7%A1%AC%E4%BB%B6/"/>
+      <category term="硬件" scheme="http://blog.bravel.com.cn/tags/%E7%A1%AC%E4%BB%B6/"/>
     
-      <category term="专用芯片" scheme="http://braveli.tk/tags/%E4%B8%93%E7%94%A8%E8%8A%AF%E7%89%87/"/>
+      <category term="专用芯片" scheme="http://blog.bravel.com.cn/tags/%E4%B8%93%E7%94%A8%E8%8A%AF%E7%89%87/"/>
     
   </entry>
   
