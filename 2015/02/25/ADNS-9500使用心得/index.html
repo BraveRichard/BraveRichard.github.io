@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://blog.bravel.com.cn/2015/02/25/ADNS-9500使用心得/index.html">
 <meta property="og:site_name" content="Brave's Blog">
 <meta property="og:description" content="最近在给实验室做一个工程项目，功能要求：实现实时反馈某物体的位移距离（二维平面内）。通过考量各种传感器并考虑到这个情景和鼠标比较接近，所以去查了光电鼠标的工作原理，最终定下来使用原属Avago公司现属于PixArt公司的传感器ADNS-9500。整个关于ADNS-9500方面的开发主要集中在年前放假回家前的两周。发现网络上关于这个传感器的资料比较少，可能是因为功能比较小众吧，相关的开发人员比较少">
-<meta property="og:updated_time" content="2016-04-19T08:43:43.304Z">
+<meta property="og:updated_time" content="2016-04-21T14:08:25.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ADNS-9500使用心得">
 <meta name="twitter:description" content="最近在给实验室做一个工程项目，功能要求：实现实时反馈某物体的位移距离（二维平面内）。通过考量各种传感器并考虑到这个情景和鼠标比较接近，所以去查了光电鼠标的工作原理，最终定下来使用原属Avago公司现属于PixArt公司的传感器ADNS-9500。整个关于ADNS-9500方面的开发主要集中在年前放假回家前的两周。发现网络上关于这个传感器的资料比较少，可能是因为功能比较小众吧，相关的开发人员比较少">
@@ -112,7 +112,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/专用芯片/" style="font-size: 10px;">专用芯片</a> <a href="/tags/硬件/" style="font-size: 10px;">硬件</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/专用芯片/" style="font-size: 10px;">专用芯片</a> <a href="/tags/硬件/" style="font-size: 10px;">硬件</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -225,6 +225,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+	  
+  
+ 
         <hr>
 <p>最近在给实验室做一个工程项目，功能要求：实现实时反馈某物体的位移距离（二维平面内）。通过考量各种传感器并考虑到这个情景和鼠标比较接近，所以去查了光电鼠标的工作原理，最终定下来使用原属Avago公司现属于PixArt公司的传感器ADNS-9500。整个关于ADNS-9500方面的开发主要集中在年前放假回家前的两周。发现网络上关于这个传感器的资料比较少，可能是因为功能比较小众吧，相关的开发人员比较少，既然我走过这条路了，就给后人留盏灯吧。在这里首先要谢谢PixArt公司深圳办事处黄工对我的帮助，谢谢回复我了一封邮件，也正是这封邮件才让我有可能在两周内实现它的主体功能。好了言归正传，开始谈谈我们的开发过程。<br><a id="more"></a></p>
 <h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>激光鼠标在原理上和光电鼠标类似，只不过用激光代替了普通的LED灯，好处是可以在更多表面上使用。因为激光是相干波，几乎是单一波长，即使经过长距离的传播依然能保持良好的强度和波形。激光鼠标传感器获得影像的过程是根据激光照射在物体表面所产生的干涉条纹而形成的光斑点反射到传感器上获得的。而传统的光学鼠标是通过照射粗糙的表面的表面所产生的阴影来获得。因此激光能对表面的图像产生更大的反差，从而使得“CMOS”成像传感器得到的图像更容易辨别，提高鼠标的定位精确性。</p>

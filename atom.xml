@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.bravel.com.cn/"/>
-  <updated>2016-04-15T13:15:21.711Z</updated>
+  <updated>2016-04-25T13:56:15.462Z</updated>
   <id>http://blog.bravel.com.cn/</id>
   
   <author>
@@ -14,6 +14,103 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis简介及在CentOS6.5下的安装</title>
+    <link href="http://blog.bravel.com.cn/2016/04/24/Redis%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%9C%A8CentOS6-5%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85/"/>
+    <id>http://blog.bravel.com.cn/2016/04/24/Redis简介及在CentOS6-5下的安装/</id>
+    <published>2016-04-24T08:05:51.000Z</published>
+    <updated>2016-04-25T13:56:15.462Z</updated>
+    
+    <content type="html">&lt;p&gt;经过和前辈交流并结合自己的反思觉得去阅读一些质量比较好的源码是提升自己能力非常重要的一环，所以决定要去读一些好的源码。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在选择哪一段代码来阅读的时候我需要考虑几个重要因素：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;时间成本（要做的事情太多）&lt;/li&gt;
+&lt;li&gt;阅读难易程度&lt;/li&gt;
+&lt;li&gt;代码量（也是出于时间成本的考虑）&lt;/li&gt;
+&lt;li&gt;与自己准备做的要有些相关性&lt;/li&gt;
+&lt;li&gt;相关文档资料、博客比较多，最好有很多人在阅读讨论这段代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结合这些因素考虑之后，我觉得Redis的源码阅读对我来说比较合适。代码量基本在五万行之内，而且这个代码阅读的人很多，讨论的人很多，还有很多相关的书籍。难度目前还不好评估。而Redis作为开源的，C语言开发的，key-value型数据库，良好的开发氛围和严谨的版本发布机制使得Redis的稳定版非常可靠，对Redis以后的发展还是很看好的，所以去扒一遍它的源码我觉得还是很有意义的。&lt;/p&gt;
+&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Redis是一个开源（BSD许可）的，内存中的数据结构存储系统，它可以用作数据库、缓存和消息中间件。它支持多种类型的数据结构，如：字符串（strings），散列（hashes），列表（lists），集合（sets），有序集合（sorted sets）与范围查询，bitmaps，hyperloglogs和地理空间（geospatial）索引半径查询。Redis内置了：复制（replication），LUA脚本（Lua scripting），LRU驱动事件（LRU eviction），事务（transactions）和不同级别的磁盘持久化（persistence），并通过Redis哨兵（Sentinel）和自动分区（Cluster）提供高可用性（high availability）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;总结一下，Redis是一个开源的、高性能、基于键值对的缓存和存储系统，通过提供多种键值数据类型来适应不同场景下的缓存和存储需求。&lt;/p&gt;
+&lt;h2 id=&quot;特性之存储结构&quot;&gt;&lt;a href=&quot;#特性之存储结构&quot; class=&quot;headerlink&quot; title=&quot;特性之存储结构&quot;&gt;&lt;/a&gt;特性之存储结构&lt;/h2&gt;&lt;p&gt; Redis的存储结构与字典、映射或称关联数组这样的数据结构比较类似，比如&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;dict[&amp;quot;key&amp;quot;] = &amp;quot;value&amp;quot;;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其中dict就是一个字典结构变量，字符串”key”是键名，而”value”是键值，在字典中我们可以设置或者获取键名对应的键值，也可以删除一个键。&lt;/p&gt;
+&lt;p&gt;Redis支持多种键值数据类型，到目前为止包括的数据类型如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;字符串类型&lt;/li&gt;
+&lt;li&gt;散列类型&lt;/li&gt;
+&lt;li&gt;列表类型&lt;/li&gt;
+&lt;li&gt;集合类型&lt;/li&gt;
+&lt;li&gt;有序集合类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;特性之内存存储和持久化&quot;&gt;&lt;a href=&quot;#特性之内存存储和持久化&quot; class=&quot;headerlink&quot; title=&quot;特性之内存存储和持久化&quot;&gt;&lt;/a&gt;特性之内存存储和持久化&lt;/h2&gt;&lt;p&gt;Redis数据库中所有的数据都存储在内存中，由于内存的读写速度远远快于硬盘，因此，Redis在性能上对比其他基于硬盘的数据库有着很不错的优势。&lt;br&gt;将数据存储在内存中也有问题，当程序退出后内存中的数据会丢失。不过Redis提供了对持久化的支持，即可以将内存中的数据异步写入硬盘中，同时不影响继续提供服务。&lt;/p&gt;
+&lt;h2 id=&quot;部署Redis到CentOS下&quot;&gt;&lt;a href=&quot;#部署Redis到CentOS下&quot; class=&quot;headerlink&quot; title=&quot;部署Redis到CentOS下&quot;&gt;&lt;/a&gt;部署Redis到CentOS下&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;环境及安装包&lt;ul&gt;
+&lt;li&gt;CentOS release 6.5 (Final)&lt;/li&gt;
+&lt;li&gt;Linux version 2.6.32-504.30.3.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-11) (GCC) )&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://download.redis.io/releases/redis-3.0.7.tar.gz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;redis-3.0.7.tar.gz&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;检查安装依赖程序&lt;/p&gt;
+&lt;figure class=&quot;highlight cmake&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; gcc-c++ &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; -y tcl&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;yum &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; wget&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;获取源码&lt;/p&gt;
+&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;wget &lt;span class=&quot;string&quot;&gt;http:&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;//download.redis.io/releases/redis-3.0.7.tar.gz&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;解压源码&lt;/p&gt;
+&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;tar -xvzf redis-&lt;span class=&quot;number&quot;&gt;3.0&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.tar&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.gz&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mv redis-&lt;span class=&quot;number&quot;&gt;3.0&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt; /usr/local/redis&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;编译安装&lt;/p&gt;
+&lt;figure class=&quot;highlight gauss&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cd /usr/&lt;span class=&quot;keyword&quot;&gt;local&lt;/span&gt;/redis&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;make&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;make&lt;/span&gt; install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;设置配置文件路径&lt;/p&gt;
+&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;mkdir -&lt;span class=&quot;selector-tag&quot;&gt;p&lt;/span&gt; /etc/redis&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cp redis&lt;span class=&quot;selector-class&quot;&gt;.conf&lt;/span&gt; /etc/redis&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;修改配置文件&lt;/p&gt;
+&lt;figure class=&quot;highlight vim&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;vim&lt;/span&gt; /etc/redis/redis.&lt;span class=&quot;keyword&quot;&gt;conf&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt; 在conf文件里，将daemonize 改为yes(即no -&amp;gt; yes)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;启动&lt;/p&gt;
+&lt;figure class=&quot;highlight dts&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta-keyword&quot;&gt;/usr/&lt;/span&gt;local&lt;span class=&quot;meta-keyword&quot;&gt;/bin/&lt;/span&gt;redis-server &lt;span class=&quot;meta-keyword&quot;&gt;/etc/&lt;/span&gt;redis/redis.conf&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看启动&lt;/p&gt;
+&lt;figure class=&quot;highlight vim&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;ps&lt;/span&gt; -ef | &lt;span class=&quot;keyword&quot;&gt;grep&lt;/span&gt; redis&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用客户端&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;redis-cli&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;127&lt;span class=&quot;selector-class&quot;&gt;.0&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.0&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.1&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:6379&lt;/span&gt;&amp;gt; &lt;span class=&quot;selector-tag&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;value&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;OK&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;127&lt;span class=&quot;selector-class&quot;&gt;.0&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.0&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.1&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:6379&lt;/span&gt;&amp;gt; &lt;span class=&quot;selector-tag&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;value&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&quot;&lt;span class=&quot;selector-tag&quot;&gt;value&lt;/span&gt;&quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;关闭客户端&lt;/p&gt;
+&lt;figure class=&quot;highlight arduino&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;redis-cli &lt;span class=&quot;built_in&quot;&gt;shutdown&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;开启启动配置&lt;/p&gt;
+&lt;figure class=&quot;highlight ruby&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;echo &lt;span class=&quot;string&quot;&gt;&quot;/usr/local/bin/redis-server /etc/redis/redis.conf &amp;amp;&quot;&lt;/span&gt; &lt;span class=&quot;meta&quot;&gt;&amp;gt;&amp;gt; &lt;/span&gt;/etc/rc.local&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;开启启动要配置在rc.local中，而/etc/profile文件，需要有用户登录了，才会被执行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;参考文献&quot;&gt;&lt;a href=&quot;#参考文献&quot; class=&quot;headerlink&quot; title=&quot;参考文献&quot;&gt;&lt;/a&gt;参考文献&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.redis.cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Redis中文官方网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Redis入门指南，李子骅&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.centoscn.com/CentOS/help/2015/0311/4853.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;查看centos系统版本命令&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000002685224&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CentOS6 安装 Redis&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;经过和前辈交流并结合自己的反思觉得去阅读一些质量比较好的源码是提升自己能力非常重要的一环，所以决定要去读一些好的源码。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Redis" scheme="http://blog.bravel.com.cn/tags/Redis/"/>
+    
+      <category term="CentOS" scheme="http://blog.bravel.com.cn/tags/CentOS/"/>
+    
+  </entry>
   
   <entry>
     <title>初识markdown</title>
@@ -93,7 +190,7 @@
     <link href="http://blog.bravel.com.cn/2015/02/25/ADNS-9500%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/"/>
     <id>http://blog.bravel.com.cn/2015/02/25/ADNS-9500使用心得/</id>
     <published>2015-02-25T03:07:42.000Z</published>
-    <updated>2016-04-19T08:43:43.304Z</updated>
+    <updated>2016-04-21T14:08:25.889Z</updated>
     
     <content type="html">&lt;hr&gt;
 &lt;p&gt;最近在给实验室做一个工程项目，功能要求：实现实时反馈某物体的位移距离（二维平面内）。通过考量各种传感器并考虑到这个情景和鼠标比较接近，所以去查了光电鼠标的工作原理，最终定下来使用原属Avago公司现属于PixArt公司的传感器ADNS-9500。整个关于ADNS-9500方面的开发主要集中在年前放假回家前的两周。发现网络上关于这个传感器的资料比较少，可能是因为功能比较小众吧，相关的开发人员比较少，既然我走过这条路了，就给后人留盏灯吧。在这里首先要谢谢PixArt公司深圳办事处黄工对我的帮助，谢谢回复我了一封邮件，也正是这封邮件才让我有可能在两周内实现它的主体功能。好了言归正传，开始谈谈我们的开发过程。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
