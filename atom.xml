@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Brave&#39;s Blog</title>
-  
+  <subtitle>骤然临之而不惊 无故加之而不怒</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.bravel.com.cn/"/>
