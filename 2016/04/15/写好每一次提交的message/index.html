@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>写好每一次提交的message | Brave&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="骤然临之而不惊 无故加之而不怒">
+  <meta name="description" content="之前就开始用git来对自己的项目进行一些管理工作，过后去阅读自己的log日志其实会发现不那么清晰，几周前自己提交的每个版本做了哪些工作都不能准确判断，这个让我很是尴尬。自己也去搜索了一些关于git提交的时候的message的写法建议，遂整理出了这样一篇文章。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="写好每一次提交的message">
 <meta property="og:url" content="http://blog.bravel.com.cn/2016/04/15/写好每一次提交的message/index.html">
 <meta property="og:site_name" content="Brave's Blog">
-<meta property="og:description" content="骤然临之而不惊 无故加之而不怒">
-<meta property="og:updated_time" content="2016-04-15T12:20:58.275Z">
+<meta property="og:description" content="之前就开始用git来对自己的项目进行一些管理工作，过后去阅读自己的log日志其实会发现不那么清晰，几周前自己提交的每个版本做了哪些工作都不能准确判断，这个让我很是尴尬。自己也去搜索了一些关于git提交的时候的message的写法建议，遂整理出了这样一篇文章。">
+<meta property="og:updated_time" content="2016-07-18T08:41:55.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="写好每一次提交的message">
-<meta name="twitter:description" content="骤然临之而不惊 无故加之而不怒">
+<meta name="twitter:description" content="之前就开始用git来对自己的项目进行一些管理工作，过后去阅读自己的log日志其实会发现不那么清晰，几周前自己提交的每个版本做了哪些工作都不能准确判断，这个让我很是尴尬。自己也去搜索了一些关于git提交的时候的message的写法建议，遂整理出了这样一篇文章。">
   
   
     <link rel="icon" href="/img/redhead.jpg">
@@ -232,7 +232,40 @@
 	  
   
  
-        
+        <p>之前就开始用git来对自己的项目进行一些管理工作，过后去阅读自己的log日志其实会发现不那么清晰，几周前自己提交的每个版本做了哪些工作都不能准确判断，这个让我很是尴尬。自己也去搜索了一些关于git提交的时候的message的写法建议，遂整理出了这样一篇文章。<br><a id="more"></a></p>
+<h2 id="为什么要关注提交信息"><a href="#为什么要关注提交信息" class="headerlink" title="为什么要关注提交信息"></a>为什么要关注提交信息</h2><ul>
+<li>加快 Reviewing Code 的过程</li>
+<li>帮助我们写好 release note</li>
+<li>很久以后帮助自己快速想起某个分支，tag或者commit增加了什么功能，改变了那些代码</li>
+<li>让其他的开发者在运行 git blame 时方便快捷找到问题</li>
+<li>一个好的提交信息，会帮助我们提高项目的整体质量</li>
+</ul>
+<h2 id="七个很棒的git提交信息规则"><a href="#七个很棒的git提交信息规则" class="headerlink" title="七个很棒的git提交信息规则"></a>七个很棒的git提交信息规则</h2><ol>
+<li>用一个空行隔开标题和正文</li>
+<li>限制标题字数在50个字符内</li>
+<li>用大写字母写标题行</li>
+<li>不要用句号结束标题行</li>
+<li>在标题行使用祈使语气</li>
+<li>正文在72个字符处换行</li>
+<li>使用正文解释是什么和为什么，而不是如何做</li>
+</ol>
+<p>一个推荐的 commit message 应该是这样的：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Redirect user <span class="built_in">to</span> <span class="keyword">the</span> requested page <span class="keyword">after</span> login</span><br><span class="line"></span><br><span class="line"><span class="keyword">https</span>://trello.com/path/<span class="built_in">to</span>/relevant/card</span><br><span class="line"></span><br><span class="line">Users were being redirected <span class="built_in">to</span> <span class="keyword">the</span> home page <span class="keyword">after</span> login, which is less</span><br><span class="line">useful than redirecting <span class="built_in">to</span> <span class="keyword">the</span> page they had originally requested <span class="keyword">before</span></span><br><span class="line">being redirected <span class="built_in">to</span> <span class="keyword">the</span> login form.</span><br><span class="line"></span><br><span class="line">* Store requested path <span class="keyword">in</span> <span class="keyword">a</span> session <span class="built_in">variable</span></span><br><span class="line">* Redirect <span class="built_in">to</span> <span class="keyword">the</span> stored location <span class="keyword">after</span> successfully logging <span class="keyword">in</span> <span class="keyword">the</span> user</span><br></pre></td></tr></table></figure></p>
+<h2 id="注释要回答如下的信息"><a href="#注释要回答如下的信息" class="headerlink" title="注释要回答如下的信息"></a>注释要回答如下的信息</h2><ul>
+<li><p>为什么这次修改是必要的？<br>要告诉 Reviewers ，你的提交包含什么改变。让他们更容易审核代码和忽略无关的改变。</p>
+</li>
+<li><p>如何解决的问题？<br>这块并不是说技术细节。</p>
+</li>
+<li><p>这些变化可能影响那些地方？<br>这个是最需要回答的问题。并且在一次提交中尽量只做1、2个变化。</p>
+</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li><a href="http://h2ex.com/175" target="_blank" rel="external">写好Git Commit信息的7个建议</a></li>
+<li><a href="https://ruby-china.org/topics/15737" target="_blank" rel="external">写出好的 commit message</a></li>
+<li><a href="https://web-design-weekly.com/2013/09/01/a-better-git-commit/" target="_blank" rel="external">A Better Git Commit</a></li>
+<li><a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.uyo6cb12dt6w" target="_blank" rel="external">AngularJS Git Commit Message Conventions</a></li>
+<li><a href="https://wiki.openstack.org/wiki/GitCommitMessages" target="_blank" rel="external">GitCommitMessages</a></li>
+</ol>
+
       
     </div>
     

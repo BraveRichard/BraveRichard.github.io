@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.bravel.com.cn/"/>
-  <updated>2016-06-01T15:02:04.352Z</updated>
+  <updated>2016-07-18T06:57:40.637Z</updated>
   <id>http://blog.bravel.com.cn/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://blog.bravel.com.cn/2016/06/01/%E5%88%A9%E7%94%A8%E7%BD%91%E6%98%93%E4%BC%81%E4%B8%9A%E9%82%AE%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%B7%B1%E5%9F%9F%E5%90%8D%E4%B8%8B%E7%9A%84%E9%82%AE%E7%AE%B1/"/>
     <id>http://blog.bravel.com.cn/2016/06/01/利用网易企业邮设置自己域名下的邮箱/</id>
     <published>2016-06-01T14:30:55.000Z</published>
-    <updated>2016-06-01T15:02:04.352Z</updated>
+    <updated>2016-07-18T06:57:40.637Z</updated>
     
-    <content type="html">&lt;p&gt;有了域名以后就想多折腾折腾，昨天突然想到可以做一个自己的域名邮箱，晚上就谷歌了一下，发现并不是很复杂，就试着做了一下，今天就通过审核，@bravel.com.cn邮箱get。回顾了一下，做做记录。&lt;/p&gt;
+    <content type="html">&lt;p&gt;有了域名以后就想多折腾折腾，昨天突然想到可以做一个自己的域名邮箱，晚上就谷歌了一下，发现并不是很复杂，就试着做了一下，今天早上就通过了审核，@bravel.com.cn邮箱get。回顾了一下，做做记录。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;所需原材料&quot;&gt;&lt;a href=&quot;#所需原材料&quot; class=&quot;headerlink&quot; title=&quot;所需原材料&quot;&gt;&lt;/a&gt;所需原材料&lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;一个域名&lt;/li&gt;
@@ -46,7 +46,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;有了域名以后就想多折腾折腾，昨天突然想到可以做一个自己的域名邮箱，晚上就谷歌了一下，发现并不是很复杂，就试着做了一下，今天就通过审核，@bravel.com.cn邮箱get。回顾了一下，做做记录。&lt;/p&gt;
+      &lt;p&gt;有了域名以后就想多折腾折腾，昨天突然想到可以做一个自己的域名邮箱，晚上就谷歌了一下，发现并不是很复杂，就试着做了一下，今天早上就通过了审核，@bravel.com.cn邮箱get。回顾了一下，做做记录。&lt;/p&gt;
     
     </summary>
     
@@ -181,11 +181,46 @@
     <link href="http://blog.bravel.com.cn/2016/04/15/%E5%86%99%E5%A5%BD%E6%AF%8F%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4%E7%9A%84message/"/>
     <id>http://blog.bravel.com.cn/2016/04/15/写好每一次提交的message/</id>
     <published>2016-04-15T12:00:59.000Z</published>
-    <updated>2016-04-15T12:20:58.275Z</updated>
+    <updated>2016-07-18T08:41:55.511Z</updated>
     
-    <content type="html"></content>
+    <content type="html">&lt;p&gt;之前就开始用git来对自己的项目进行一些管理工作，过后去阅读自己的log日志其实会发现不那么清晰，几周前自己提交的每个版本做了哪些工作都不能准确判断，这个让我很是尴尬。自己也去搜索了一些关于git提交的时候的message的写法建议，遂整理出了这样一篇文章。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;为什么要关注提交信息&quot;&gt;&lt;a href=&quot;#为什么要关注提交信息&quot; class=&quot;headerlink&quot; title=&quot;为什么要关注提交信息&quot;&gt;&lt;/a&gt;为什么要关注提交信息&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;加快 Reviewing Code 的过程&lt;/li&gt;
+&lt;li&gt;帮助我们写好 release note&lt;/li&gt;
+&lt;li&gt;很久以后帮助自己快速想起某个分支，tag或者commit增加了什么功能，改变了那些代码&lt;/li&gt;
+&lt;li&gt;让其他的开发者在运行 git blame 时方便快捷找到问题&lt;/li&gt;
+&lt;li&gt;一个好的提交信息，会帮助我们提高项目的整体质量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;七个很棒的git提交信息规则&quot;&gt;&lt;a href=&quot;#七个很棒的git提交信息规则&quot; class=&quot;headerlink&quot; title=&quot;七个很棒的git提交信息规则&quot;&gt;&lt;/a&gt;七个很棒的git提交信息规则&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;用一个空行隔开标题和正文&lt;/li&gt;
+&lt;li&gt;限制标题字数在50个字符内&lt;/li&gt;
+&lt;li&gt;用大写字母写标题行&lt;/li&gt;
+&lt;li&gt;不要用句号结束标题行&lt;/li&gt;
+&lt;li&gt;在标题行使用祈使语气&lt;/li&gt;
+&lt;li&gt;正文在72个字符处换行&lt;/li&gt;
+&lt;li&gt;使用正文解释是什么和为什么，而不是如何做&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;一个推荐的 commit message 应该是这样的：&lt;br&gt;&lt;figure class=&quot;highlight livecodeserver&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Redirect user &lt;span class=&quot;built_in&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;the&lt;/span&gt; requested page &lt;span class=&quot;keyword&quot;&gt;after&lt;/span&gt; login&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;https&lt;/span&gt;://trello.com/path/&lt;span class=&quot;built_in&quot;&gt;to&lt;/span&gt;/relevant/card&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Users were being redirected &lt;span class=&quot;built_in&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;the&lt;/span&gt; home page &lt;span class=&quot;keyword&quot;&gt;after&lt;/span&gt; login, which is less&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;useful than redirecting &lt;span class=&quot;built_in&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;the&lt;/span&gt; page they had originally requested &lt;span class=&quot;keyword&quot;&gt;before&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;being redirected &lt;span class=&quot;built_in&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;the&lt;/span&gt; login form.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;* Store requested path &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;a&lt;/span&gt; session &lt;span class=&quot;built_in&quot;&gt;variable&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;* Redirect &lt;span class=&quot;built_in&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;the&lt;/span&gt; stored location &lt;span class=&quot;keyword&quot;&gt;after&lt;/span&gt; successfully logging &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;the&lt;/span&gt; user&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&quot;注释要回答如下的信息&quot;&gt;&lt;a href=&quot;#注释要回答如下的信息&quot; class=&quot;headerlink&quot; title=&quot;注释要回答如下的信息&quot;&gt;&lt;/a&gt;注释要回答如下的信息&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;为什么这次修改是必要的？&lt;br&gt;要告诉 Reviewers ，你的提交包含什么改变。让他们更容易审核代码和忽略无关的改变。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如何解决的问题？&lt;br&gt;这块并不是说技术细节。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;这些变化可能影响那些地方？&lt;br&gt;这个是最需要回答的问题。并且在一次提交中尽量只做1、2个变化。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;参考文献&quot;&gt;&lt;a href=&quot;#参考文献&quot; class=&quot;headerlink&quot; title=&quot;参考文献&quot;&gt;&lt;/a&gt;参考文献&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://h2ex.com/175&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;写好Git Commit信息的7个建议&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://ruby-china.org/topics/15737&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;写出好的 commit message&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://web-design-weekly.com/2013/09/01/a-better-git-commit/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;A Better Git Commit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.uyo6cb12dt6w&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;AngularJS Git Commit Message Conventions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://wiki.openstack.org/wiki/GitCommitMessages&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitCommitMessages&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
     
     <summary type="html">
+    
+      &lt;p&gt;之前就开始用git来对自己的项目进行一些管理工作，过后去阅读自己的log日志其实会发现不那么清晰，几周前自己提交的每个版本做了哪些工作都不能准确判断，这个让我很是尴尬。自己也去搜索了一些关于git提交的时候的message的写法建议，遂整理出了这样一篇文章。&lt;br&gt;
     
     </summary>
     
