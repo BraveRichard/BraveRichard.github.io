@@ -6,16 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Linux调试技术之内存泄露 | Brave&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="骤然临之而不惊 无故加之而不怒">
+  <meta name="description" content="本文主要讨论在Linux系统下关于出现内存泄露的调试方法，主要使用内存调试工具memwatch 和yet another malloc debugger(YAMD)来进行调试。主要针对内存泄露问题来进行研究。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux调试技术之内存泄露">
 <meta property="og:url" content="http://blog.bravel.com.cn/2016/07/20/Linux调试技术之内存泄露/index.html">
 <meta property="og:site_name" content="Brave's Blog">
-<meta property="og:description" content="骤然临之而不惊 无故加之而不怒">
-<meta property="og:updated_time" content="2016-07-20T06:50:47.705Z">
+<meta property="og:description" content="本文主要讨论在Linux系统下关于出现内存泄露的调试方法，主要使用内存调试工具memwatch 和yet another malloc debugger(YAMD)来进行调试。主要针对内存泄露问题来进行研究。">
+<meta property="og:updated_time" content="2016-07-20T12:48:50.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux调试技术之内存泄露">
-<meta name="twitter:description" content="骤然临之而不惊 无故加之而不怒">
+<meta name="twitter:description" content="本文主要讨论在Linux系统下关于出现内存泄露的调试方法，主要使用内存调试工具memwatch 和yet another malloc debugger(YAMD)来进行调试。主要针对内存泄露问题来进行研究。">
   
   
     <link rel="icon" href="/img/redhead.jpg">
@@ -114,7 +114,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/专用芯片/" style="font-size: 10px;">专用芯片</a> <a href="/tags/硬件/" style="font-size: 10px;">硬件</a> <a href="/tags/邮箱，域名解析/" style="font-size: 10px;">邮箱，域名解析</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/专用芯片/" style="font-size: 10px;">专用芯片</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/硬件/" style="font-size: 10px;">硬件</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/邮箱，域名解析/" style="font-size: 10px;">邮箱，域名解析</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -217,6 +217,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存泄露/">内存泄露</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -228,7 +232,8 @@
 	  
   
  
-        
+        <p>本文主要讨论在Linux系统下关于出现内存泄露的调试方法，主要使用内存调试工具memwatch 和yet another malloc debugger(YAMD)来进行调试。主要针对内存泄露问题来进行研究。<br><a id="more"></a></p>
+
       
     </div>
     
@@ -236,6 +241,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2016/07/20/Linux调试技术之gdb的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Linux调试技术之gdb的使用
+        
+      </div>
+    </a>
   
   
     <a href="/2016/06/01/利用网易企业邮设置自己域名下的邮箱/" id="article-nav-older" class="article-nav-link-wrap">

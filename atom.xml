@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.bravel.com.cn/"/>
-  <updated>2016-07-20T06:50:47.705Z</updated>
+  <updated>2016-07-20T14:53:21.129Z</updated>
   <id>http://blog.bravel.com.cn/</id>
   
   <author>
@@ -16,18 +16,135 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Linux调试技术之gdb的使用</title>
+    <link href="http://blog.bravel.com.cn/2016/07/20/Linux%E8%B0%83%E8%AF%95%E6%8A%80%E6%9C%AF%E4%B9%8Bgdb%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://blog.bravel.com.cn/2016/07/20/Linux调试技术之gdb的使用/</id>
+    <published>2016-07-20T12:49:26.000Z</published>
+    <updated>2016-07-20T14:53:21.129Z</updated>
+    
+    <content type="html">&lt;p&gt;gdb是一个由GNU开源组织发布的，在UNIX/Linux操作系统下的，基于命令行的，功能强大的程序调试工具。本文主要讨论在Linux系统下gdb调试工具的基本使用。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;gdb简介&quot;&gt;&lt;a href=&quot;#gdb简介&quot; class=&quot;headerlink&quot; title=&quot;gdb简介&quot;&gt;&lt;/a&gt;gdb简介&lt;/h2&gt;&lt;p&gt;gdb是由GNU开源组织发布的一个强大的在UNIX/Linux操作系统下的程序调试工具，gdb主要帮助工程师完成下面4个方面的功能：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;启动程序，可以按照工程师自定义的要求随心所欲的运行程序&lt;/li&gt;
+&lt;li&gt;让被调试的程序在工程师指定的断点处停住，断点可以是条件表达式&lt;/li&gt;
+&lt;li&gt;当程序被停住时，可以检查此时程序中所发生的事，并追索上文&lt;/li&gt;
+&lt;li&gt;动态地改变程序的执行环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;启动gdb&quot;&gt;&lt;a href=&quot;#启动gdb&quot; class=&quot;headerlink&quot; title=&quot;启动gdb&quot;&gt;&lt;/a&gt;启动gdb&lt;/h2&gt;&lt;p&gt;对C/C++程序的调试，需要在编译前加上-g的选项，即&lt;br&gt;&lt;figure class=&quot;highlight stata&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$g&lt;/span&gt;++ -&lt;span class=&quot;keyword&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;test&lt;/span&gt;.cpp -o &lt;span class=&quot;keyword&quot;&gt;test&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;调试可执行文件，即gdb后接可执行文件：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$gdb&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;当程序非法执行后core dump后产生的文件&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$gdb&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt; core&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果程序是一个服务程序，则可以指定这个服务程序运行时的进程ID，gdb会自动attach上去，并调试它。程序应当是在PATH中可以搜索的到。&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$gdb&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;test&lt;/span&gt; &amp;lt;PID&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;gdb交互命令&quot;&gt;&lt;a href=&quot;#gdb交互命令&quot; class=&quot;headerlink&quot; title=&quot;gdb交互命令&quot;&gt;&lt;/a&gt;gdb交互命令&lt;/h2&gt;&lt;p&gt;启动gdb后，进入到交互模式，可以通过以下命令完成对程序的调试。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; 运行 &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;run(简记为r)：其作用是运行程序，当遇到断点后，程序会自动在停止在断点处，等待用户输入下一步的命令&lt;/li&gt;
+&lt;li&gt;continue(简记为c)：其作用是继续执行，到下一个断点处或运行至程序结束&lt;/li&gt;
+&lt;li&gt;next(简记为n)：单步跟踪程序，当遇到函数调用时，并不进入到该函数体内。此命令与step的主要区别是，step遇到函数时会跟进到函数内部中进行运行，而next是直接调用函数，并不会跟进到函数体内部&lt;/li&gt;
+&lt;li&gt;step(简记为s)：单步调试，如果遇到函数调用，会跟进到函数体内部&lt;/li&gt;
+&lt;li&gt;until：当在一个循环体内单步跟踪时，这个命令可以直接运行直到退出循环体&lt;/li&gt;
+&lt;li&gt;until+行号 ：运行至某行，不仅仅是用来跳出循环的 &lt;/li&gt;
+&lt;li&gt;finish：运行程序，直到当前函数完成返回，并打印函数返回时的堆栈地址和返回值及参数值等信息&lt;/li&gt;
+&lt;li&gt;call 函数名(参数)：调用程序中可见的函数，并传递参数进去&lt;/li&gt;
+&lt;li&gt;quit(简记为q)：退出gdb&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt; 关于断点 &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;break n(简记为b n)：在第n行处设置断点（可以带上代码路径和代码名称）&lt;/li&gt;
+&lt;li&gt;break [break-args] if (condition)：条件断点，当满足条件时进入断点&lt;/li&gt;
+&lt;li&gt;delete 断点号n：删除第n个断点&lt;/li&gt;
+&lt;li&gt;disable断点号n：关闭第n个断点&lt;/li&gt;
+&lt;li&gt;enable断点号n：开启第n个断点&lt;/li&gt;
+&lt;li&gt;clear行号n：清除第n行的断点&lt;/li&gt;
+&lt;li&gt;info b：显示当前程序的断点设置情况&lt;/li&gt;
+&lt;li&gt;delete breakpoints：清除所有断点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt; 关于源码显示 &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;list(简记为l)：其作用就是列出程序的源代码，默认每次显示10行，连续输入会显示接下来的10行代码&lt;/li&gt;
+&lt;li&gt;list 行号：将显示已当前文件以行号为中心的前后10行代码&lt;/li&gt;
+&lt;li&gt;list 函数名：将显示“函数名”所在函数的源代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt; 打印表达式 &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;print 表达式(简记为p)：其中表达式可以是任何当前正在被测试程序的有效表达式，比如当前正在调试程序的程序，包括数字，变量甚至是函数调用&lt;/li&gt;
+&lt;li&gt;print a：将显示整数a的值&lt;/li&gt;
+&lt;li&gt;print ++a：将把a中的值加1，并显示出来&lt;/li&gt;
+&lt;li&gt;print gdb_test(1)：将以整数1（也可为变量）作为参数调用gdb_test()函数&lt;/li&gt;
+&lt;li&gt;display 表达式：在单步运行时非常有用，它将在每次单步表达式进行指令之后，紧接着输出被设置的表达式及值&lt;/li&gt;
+&lt;li&gt;watch 表达式：设置一个监视点，一旦被监视的表达式发生变化时，gdb将强行终止正在被调试的程序&lt;/li&gt;
+&lt;li&gt;whatis：查询变量或函数&lt;/li&gt;
+&lt;li&gt;info function：查询函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt; 查询运行信息 &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;where/bt：当前运行的堆栈列表&lt;/li&gt;
+&lt;li&gt;bt backtrace：显示当前调用堆栈&lt;/li&gt;
+&lt;li&gt;up/down：改变堆栈显示的深度&lt;/li&gt;
+&lt;li&gt;set args 参数：指定运行时的参数&lt;/li&gt;
+&lt;li&gt;show args：查看设置好的参数&lt;/li&gt;
+&lt;li&gt;info program：来查看程序是否在运行，以及进程号，被暂停的原因&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt; 分割窗口 &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;layout：用于分割窗口，可以一边查看代码，一边测试&lt;/li&gt;
+&lt;li&gt;layout src：显示源代码窗口&lt;/li&gt;
+&lt;li&gt;layout asm：显示反汇编窗口&lt;/li&gt;
+&lt;li&gt;layout regs：显示源代码/反汇编和CPU寄存器窗口&lt;/li&gt;
+&lt;li&gt;layout split：显示源代码和反汇编窗口&lt;/li&gt;
+&lt;li&gt;Ctrl+L：刷新窗口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;番外篇&quot;&gt;&lt;a href=&quot;#番外篇&quot; class=&quot;headerlink&quot; title=&quot;番外篇&quot;&gt;&lt;/a&gt;番外篇&lt;/h2&gt;&lt;p&gt;gdb有一个增强工具——cgdb，主要功能就是可以在调试的同时显示代码，界面类似vim，其他使用和gdb基本相同。&lt;/p&gt;
+&lt;h2 id=&quot;参考文献&quot;&gt;&lt;a href=&quot;#参考文献&quot; class=&quot;headerlink&quot; title=&quot;参考文献&quot;&gt;&lt;/a&gt;参考文献&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/haoel/article/details/2879&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;用GDB调试程序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/21cnbao/article/details/7385161&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux gdb调试器用法全面解析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Docs » 工具参考篇 » 1. gdb 调试利器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://lesca.me/archives/gdb-breakpoints-command-list-watchpoint.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GDB笔记（二）：条件断点、命令列表、监视点&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;gdb是一个由GNU开源组织发布的，在UNIX/Linux操作系统下的，基于命令行的，功能强大的程序调试工具。本文主要讨论在Linux系统下gdb调试工具的基本使用。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://blog.bravel.com.cn/tags/Linux/"/>
+    
+      <category term="调试" scheme="http://blog.bravel.com.cn/tags/%E8%B0%83%E8%AF%95/"/>
+    
+      <category term="gdb" scheme="http://blog.bravel.com.cn/tags/gdb/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux调试技术之内存泄露</title>
     <link href="http://blog.bravel.com.cn/2016/07/20/Linux%E8%B0%83%E8%AF%95%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/"/>
     <id>http://blog.bravel.com.cn/2016/07/20/Linux调试技术之内存泄露/</id>
     <published>2016-07-20T06:50:47.000Z</published>
-    <updated>2016-07-20T06:50:47.705Z</updated>
+    <updated>2016-07-20T12:48:50.600Z</updated>
     
-    <content type="html"></content>
+    <content type="html">&lt;p&gt;本文主要讨论在Linux系统下关于出现内存泄露的调试方法，主要使用内存调试工具memwatch 和yet another malloc debugger(YAMD)来进行调试。主要针对内存泄露问题来进行研究。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+</content>
     
     <summary type="html">
     
+      &lt;p&gt;本文主要讨论在Linux系统下关于出现内存泄露的调试方法，主要使用内存调试工具memwatch 和yet another malloc debugger(YAMD)来进行调试。主要针对内存泄露问题来进行研究。&lt;br&gt;
+    
     </summary>
     
+    
+      <category term="Linux" scheme="http://blog.bravel.com.cn/tags/Linux/"/>
+    
+      <category term="内存泄露" scheme="http://blog.bravel.com.cn/tags/%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/"/>
     
   </entry>
   
