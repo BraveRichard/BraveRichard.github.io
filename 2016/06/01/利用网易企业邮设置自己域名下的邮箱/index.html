@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://blog.bravel.com.cn/2016/06/01/利用网易企业邮设置自己域名下的邮箱/index.html">
 <meta property="og:site_name" content="Brave's Blog">
 <meta property="og:description" content="有了域名以后就想多折腾折腾，昨天突然想到可以做一个自己的域名邮箱，晚上就谷歌了一下，发现并不是很复杂，就试着做了一下，今天早上就通过了审核，@bravel.com.cn邮箱get。回顾了一下，做做记录。">
-<meta property="og:updated_time" content="2016-07-18T06:57:40.637Z">
+<meta property="og:updated_time" content="2016-07-20T11:57:52.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用网易企业邮设置自己域名下的邮箱">
 <meta name="twitter:description" content="有了域名以后就想多折腾折腾，昨天突然想到可以做一个自己的域名邮箱，晚上就谷歌了一下，发现并不是很复杂，就试着做了一下，今天早上就通过了审核，@bravel.com.cn邮箱get。回顾了一下，做做记录。">
@@ -243,14 +243,18 @@
 <li>域名解析设置，博主的域名是由腾讯云提供服务的，所以以其为例。</li>
 </ol>
 <ul>
-<li>在域名解析页面下添加邮件交换记录（MX），域名由邮箱服务提供商提供，网易免费企业邮的域名为：my.ym.163.com。主机记录一般填@，例如博主的填@时，邮箱域名就为@bravel.com.cn，如果填mail的话，邮箱域名就变为了@mail.bravel.com.cn</li>
-<li>增加文本记录，类型为txt，具体内容为：v=spf1 include:spf.163.com ~all</li>
+<li>在域名解析页面下添加邮件交换记录（MX），域名由邮箱服务提供商提供，网易免费企业邮的域名为：<code>my.ym.163.com</code>。主机记录一般填@，例如博主的填@时，邮箱域名就为<code>@bravel.com.cn</code>，如果填mail的话，邮箱域名就变为了<code>@mail.bravel.com.cn</code></li>
+<li>增加文本记录，类型为txt，具体内容为：<code>v=spf1 include:spf.163.com ~all</code></li>
 </ul>
-<p>至此，设置部分就结束了，等待网易验证解析通过以后就可以愉快的使用了。<br>PS:p_li@bravel.com.cn邮箱今天开始正式投入使用啦。</p>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>使用<code>nslookup</code>指令来进行验证,在命令行模式下输入如下的指令<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup -qt-=mx bravel<span class="selector-class">.com</span><span class="selector-class">.cn</span></span><br></pre></td></tr></table></figure></p>
+<p>nslookup指令是用来检查DNS信息。即查询域名对应的IP地址，包括A类记录和CNAME记录，如果查到的是CNAME记录还会返回别名记录的设置情况。</p>
+<p>至此，设置部分就结束了，等待网易验证解析通过以后就可以愉快的使用了。<br>PS:<code>p_li@bravel.com.cn</code>邮箱今天开始正式投入使用啦。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
 <li><a href="https://segmentfault.com/q/1010000000367962" target="_blank" rel="external">如何设置自己域名下的邮箱？</a></li>
 <li><a href="http://blog.sina.com.cn/s/blog_701c52e90101akcl.html" target="_blank" rel="external">小公司如何免费建独立域名免费企业邮箱</a></li>
 <li><a href="http://app.ym.163.com/ym/help/help-hmail.html#3.6" target="_blank" rel="external">网易免费企业邮帮助中心</a></li>
+<li><a href="http://www.cnblogs.com/earl86/archive/2009/02/06/1666439.html" target="_blank" rel="external">常用cmd命令——nslookup命令</a></li>
+<li><a href="http://book.51cto.com/art/200709/55424.htm" target="_blank" rel="external">使用nslookup命令检查DNS信息</a></li>
 </ol>
 
       
@@ -260,6 +264,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2016/07/20/Linux调试技术之内存泄露/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Linux调试技术之内存泄露
+        
+      </div>
+    </a>
   
   
     <a href="/2016/04/24/Redis简介及在CentOS6-5下的安装/" id="article-nav-older" class="article-nav-link-wrap">

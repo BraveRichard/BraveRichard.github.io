@@ -4,20 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>读书 | Brave&#39;s Blog</title>
+  <title>Linux调试技术之内存泄露 | Brave&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="正则表达式必知必会2016-07-17 10:46:27整本书比较简洁，而且每个知识点都配合一个恰当的例子，很帮助理解，很快就了解了正则淘宝技术这十年2016-05-09 10:48:37薄薄一本书看淘宝的崛起之路。创业，做东西，前期重要的是点子，然后尽快尽快尽快实现，用现成的，不要造轮子，当性能到达瓶颈的时候，就只好造轮子了。这个时候，应该就已经到业界领先的水平了。.leisure{width:">
-<meta property="og:type" content="website">
-<meta property="og:title" content="读书">
-<meta property="og:url" content="http://blog.bravel.com.cn/douban/index.html">
+  <meta name="description" content="骤然临之而不惊 无故加之而不怒">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux调试技术之内存泄露">
+<meta property="og:url" content="http://blog.bravel.com.cn/2016/07/20/Linux调试技术之内存泄露/index.html">
 <meta property="og:site_name" content="Brave's Blog">
-<meta property="og:description" content="正则表达式必知必会2016-07-17 10:46:27整本书比较简洁，而且每个知识点都配合一个恰当的例子，很帮助理解，很快就了解了正则淘宝技术这十年2016-05-09 10:48:37薄薄一本书看淘宝的崛起之路。创业，做东西，前期重要的是点子，然后尽快尽快尽快实现，用现成的，不要造轮子，当性能到达瓶颈的时候，就只好造轮子了。这个时候，应该就已经到业界领先的水平了。.leisure{width:">
-<meta property="og:image" content="http://img3.douban.com/lpic/s2794811.jpg">
-<meta property="og:image" content="http://img3.douban.com/lpic/s26713863.jpg">
+<meta property="og:description" content="骤然临之而不惊 无故加之而不怒">
+<meta property="og:updated_time" content="2016-07-20T06:50:47.705Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读书">
-<meta name="twitter:description" content="正则表达式必知必会2016-07-17 10:46:27整本书比较简洁，而且每个知识点都配合一个恰当的例子，很帮助理解，很快就了解了正则淘宝技术这十年2016-05-09 10:48:37薄薄一本书看淘宝的崛起之路。创业，做东西，前期重要的是点子，然后尽快尽快尽快实现，用现成的，不要造轮子，当性能到达瓶颈的时候，就只好造轮子了。这个时候，应该就已经到业界领先的水平了。.leisure{width:">
-<meta name="twitter:image" content="http://img3.douban.com/lpic/s2794811.jpg">
+<meta name="twitter:title" content="Linux调试技术之内存泄露">
+<meta name="twitter:description" content="骤然临之而不惊 无故加之而不怒">
   
   
     <link rel="icon" href="/img/redhead.jpg">
@@ -194,11 +192,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="undefined-douban" class="article article-type-undefined" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Linux调试技术之内存泄露" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/douban/index.html" class="article-date">
-  	<time datetime="2016-07-20T11:58:39.181Z" itemprop="datePublished">2016-07-20</time>
+      <a href="/2016/07/20/Linux调试技术之内存泄露/" class="article-date">
+  	<time datetime="2016-07-20T06:50:47.000Z" itemprop="datePublished">2016-07-20</time>
 </a>
     </div>
   
@@ -211,7 +209,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      读书
+      Linux调试技术之内存泄露
     </h1>
   
 
@@ -230,13 +228,23 @@
 	  
   
  
-        <article class="leisure"><aside><img src=http://img3.douban.com/lpic/s2794811.jpg alt=正则表达式必知必会></aside><section class="intro"><ul><li><a class href=https://book.douban.com/subject/2269648/>正则表达式必知必会</a></li><li>2016-07-17 10:46:27</li><li>整本书比较简洁，而且每个知识点都配合一个恰当的例子，很帮助理解，很快就了解了正则</li></ul></section></article><hr><article class="leisure"><aside><img src=http://img3.douban.com/lpic/s26713863.jpg alt=淘宝技术这十年></aside><section class="intro"><ul><li><a class href=https://book.douban.com/subject/24335672/>淘宝技术这十年</a></li><li>2016-05-09 10:48:37</li><li>薄薄一本书看淘宝的崛起之路。创业，做东西，前期重要的是点子，然后尽快尽快尽快实现，用现成的，不要造轮子，当性能到达瓶颈的时候，就只好造轮子了。这个时候，应该就已经到业界领先的水平了。</li></ul></section></article><hr><style>.leisure{width:100%;min-height:130px;margin:20px 0;display:block;clear:both}.leisure img{width:128px;height:182px;float:left;background-color:white;padding:5px;border-radius:5px;border:1px solid #dedede;margin:-5px 10px 5px 0}.leisure .intro{margin:5px 10px 5px 0;width:100%}.leisure .intro ul{list-style:none;margin-left:0;min-height:188px}.leisure .intro ul li{line-height:20px;margin: 10px 0;}.leisure .intro ul li:first-child{font-size:20px;padding-bottom:5px;margin-bottom:10px;border-bottom:1px #eee solid}.leisure .intro ul li:before{content:none}</style>
+        
       
     </div>
     
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/01/利用网易企业邮设置自己域名下的邮箱/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">利用网易企业邮设置自己域名下的邮箱</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -266,7 +274,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="douban" data-title="读书" data-url="http://blog.bravel.com.cn/douban/index.html"></div>
+	<div class="ds-thread" data-thread-key="Linux调试技术之内存泄露" data-title="Linux调试技术之内存泄露" data-url="http://blog.bravel.com.cn/2016/07/20/Linux调试技术之内存泄露/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -320,7 +328,7 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

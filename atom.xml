@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.bravel.com.cn/"/>
-  <updated>2016-07-18T06:57:40.637Z</updated>
+  <updated>2016-07-20T06:50:47.705Z</updated>
   <id>http://blog.bravel.com.cn/</id>
   
   <author>
@@ -16,11 +16,27 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Linux调试技术之内存泄露</title>
+    <link href="http://blog.bravel.com.cn/2016/07/20/Linux%E8%B0%83%E8%AF%95%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/"/>
+    <id>http://blog.bravel.com.cn/2016/07/20/Linux调试技术之内存泄露/</id>
+    <published>2016-07-20T06:50:47.000Z</published>
+    <updated>2016-07-20T06:50:47.705Z</updated>
+    
+    <content type="html"></content>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>利用网易企业邮设置自己域名下的邮箱</title>
     <link href="http://blog.bravel.com.cn/2016/06/01/%E5%88%A9%E7%94%A8%E7%BD%91%E6%98%93%E4%BC%81%E4%B8%9A%E9%82%AE%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%B7%B1%E5%9F%9F%E5%90%8D%E4%B8%8B%E7%9A%84%E9%82%AE%E7%AE%B1/"/>
     <id>http://blog.bravel.com.cn/2016/06/01/利用网易企业邮设置自己域名下的邮箱/</id>
     <published>2016-06-01T14:30:55.000Z</published>
-    <updated>2016-07-18T06:57:40.637Z</updated>
+    <updated>2016-07-20T11:57:52.172Z</updated>
     
     <content type="html">&lt;p&gt;有了域名以后就想多折腾折腾，昨天突然想到可以做一个自己的域名邮箱，晚上就谷歌了一下，发现并不是很复杂，就试着做了一下，今天早上就通过了审核，@bravel.com.cn邮箱get。回顾了一下，做做记录。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -33,14 +49,18 @@
 &lt;li&gt;域名解析设置，博主的域名是由腾讯云提供服务的，所以以其为例。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;ul&gt;
-&lt;li&gt;在域名解析页面下添加邮件交换记录（MX），域名由邮箱服务提供商提供，网易免费企业邮的域名为：my.ym.163.com。主机记录一般填@，例如博主的填@时，邮箱域名就为@bravel.com.cn，如果填mail的话，邮箱域名就变为了@mail.bravel.com.cn&lt;/li&gt;
-&lt;li&gt;增加文本记录，类型为txt，具体内容为：v=spf1 include:spf.163.com ~all&lt;/li&gt;
+&lt;li&gt;在域名解析页面下添加邮件交换记录（MX），域名由邮箱服务提供商提供，网易免费企业邮的域名为：&lt;code&gt;my.ym.163.com&lt;/code&gt;。主机记录一般填@，例如博主的填@时，邮箱域名就为&lt;code&gt;@bravel.com.cn&lt;/code&gt;，如果填mail的话，邮箱域名就变为了&lt;code&gt;@mail.bravel.com.cn&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;增加文本记录，类型为txt，具体内容为：&lt;code&gt;v=spf1 include:spf.163.com ~all&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;至此，设置部分就结束了，等待网易验证解析通过以后就可以愉快的使用了。&lt;br&gt;PS:p_li@bravel.com.cn邮箱今天开始正式投入使用啦。&lt;/p&gt;
+&lt;h2 id=&quot;验证&quot;&gt;&lt;a href=&quot;#验证&quot; class=&quot;headerlink&quot; title=&quot;验证&quot;&gt;&lt;/a&gt;验证&lt;/h2&gt;&lt;p&gt;使用&lt;code&gt;nslookup&lt;/code&gt;指令来进行验证,在命令行模式下输入如下的指令&lt;br&gt;&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;nslookup -qt-=mx bravel&lt;span class=&quot;selector-class&quot;&gt;.com&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.cn&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;nslookup指令是用来检查DNS信息。即查询域名对应的IP地址，包括A类记录和CNAME记录，如果查到的是CNAME记录还会返回别名记录的设置情况。&lt;/p&gt;
+&lt;p&gt;至此，设置部分就结束了，等待网易验证解析通过以后就可以愉快的使用了。&lt;br&gt;PS:&lt;code&gt;p_li@bravel.com.cn&lt;/code&gt;邮箱今天开始正式投入使用啦。&lt;/p&gt;
 &lt;h2 id=&quot;参考文献&quot;&gt;&lt;a href=&quot;#参考文献&quot; class=&quot;headerlink&quot; title=&quot;参考文献&quot;&gt;&lt;/a&gt;参考文献&lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;&lt;a href=&quot;https://segmentfault.com/q/1010000000367962&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何设置自己域名下的邮箱？&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://blog.sina.com.cn/s/blog_701c52e90101akcl.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;小公司如何免费建独立域名免费企业邮箱&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://app.ym.163.com/ym/help/help-hmail.html#3.6&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;网易免费企业邮帮助中心&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/earl86/archive/2009/02/06/1666439.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;常用cmd命令——nslookup命令&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://book.51cto.com/art/200709/55424.htm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用nslookup命令检查DNS信息&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </content>
     
@@ -60,7 +80,7 @@
     <link href="http://blog.bravel.com.cn/2016/04/24/Redis%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%9C%A8CentOS6-5%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85/"/>
     <id>http://blog.bravel.com.cn/2016/04/24/Redis简介及在CentOS6-5下的安装/</id>
     <published>2016-04-24T08:05:51.000Z</published>
-    <updated>2016-05-03T12:23:09.489Z</updated>
+    <updated>2016-07-19T07:45:39.386Z</updated>
     
     <content type="html">&lt;p&gt;经过和前辈交流并结合自己的反思觉得去阅读一些质量比较好的源码是提升自己能力非常重要的一环，所以决定要去读一些好的源码。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在选择哪一段代码来阅读的时候我需要考虑几个重要因素：&lt;/p&gt;
@@ -92,7 +112,7 @@
 &lt;li&gt;环境及安装包&lt;ul&gt;
 &lt;li&gt;CentOS release 6.5 (Final)&lt;/li&gt;
 &lt;li&gt;Linux version 2.6.32-504.30.3.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-11) (GCC) )&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://download.redis.io/releases/redis-3.0.7.tar.gz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;redis-3.0.7.tar.gz&lt;/a&gt;  (注：在安装Redis前需要了解Redis的版本规则以选择最适合自己的版本，Redis约定次版本号为偶数时的版本是稳定版，奇数是非稳定版，生产环境下一班需要使用稳定版本。本文选择了较新的稳定版本3.0.7)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://download.redis.io/releases/redis-3.0.7.tar.gz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;redis-3.0.7.tar.gz&lt;/a&gt;  (注：在安装Redis前需要了解Redis的版本规则以选择最适合自己的版本，Redis约定次版本号为偶数时的版本是稳定版，奇数是非稳定版，生产环境下一般需要使用稳定版本。本文选择了较新的稳定版本3.0.7)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;检查安装依赖程序&lt;/p&gt;
