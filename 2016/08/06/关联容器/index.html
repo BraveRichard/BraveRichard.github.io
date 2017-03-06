@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>关联容器 | Brave&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关联容器支持高效的关键字查找和访问。两个主要的关联容器类型是map和set。map中的元素是一些关键字-值（key-value）对：关键字起到索引的作用，值则表示与索引相关联的数据。set中每个元素只包含一个关键字，set支持高效的关键字查询操作–检查一个给定关键字是否存在set中。简单来说，map可以理解为关键字-值对的集合，可以称为关联数组。而map可以理解为关键字的简单集合。当只是想知道一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关联容器">
+<meta property="og:url" content="http://blog.bravel.com.cn/2016/08/06/关联容器/index.html">
+<meta property="og:site_name" content="Brave's Blog">
+<meta property="og:description" content="关联容器支持高效的关键字查找和访问。两个主要的关联容器类型是map和set。map中的元素是一些关键字-值（key-value）对：关键字起到索引的作用，值则表示与索引相关联的数据。set中每个元素只包含一个关键字，set支持高效的关键字查询操作–检查一个给定关键字是否存在set中。简单来说，map可以理解为关键字-值对的集合，可以称为关联数组。而map可以理解为关键字的简单集合。当只是想知道一个">
+<meta property="og:updated_time" content="2017-03-06T15:37:10.094Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关联容器">
+<meta name="twitter:description" content="关联容器支持高效的关键字查找和访问。两个主要的关联容器类型是map和set。map中的元素是一些关键字-值（key-value）对：关键字起到索引的作用，值则表示与索引相关联的数据。set中每个元素只包含一个关键字，set支持高效的关键字查询操作–检查一个给定关键字是否存在set中。简单来说，map可以理解为关键字-值对的集合，可以称为关联数组。而map可以理解为关键字的简单集合。当只是想知道一个">
+  
+  
+    <link rel="icon" href="/img/redhead.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/brave.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Brave</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">骤然临之而不惊 无故加之而不怒</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">文章</a></li>
+				        
+							<li><a href="/project">项目</a></li>
+				        
+							<li><a href="/douban">读书</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/BraveRichard" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/u/1817008243" title="weibo">weibo</a>
+					        
+								<a class="mail" target="_blank" href="http://Mailto:p_li@bravel.com.cn" title="mail">mail</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/C/" style="font-size: 20px;">C++</a> <a href="/tags/CentOS/" style="font-size: 10px;">CentOS</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/gdb/" style="font-size: 10px;">gdb</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/专用芯片/" style="font-size: 10px;">专用芯片</a> <a href="/tags/关联容器/" style="font-size: 10px;">关联容器</a> <a href="/tags/内存泄露/" style="font-size: 10px;">内存泄露</a> <a href="/tags/硬件/" style="font-size: 10px;">硬件</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/迭代器/" style="font-size: 10px;">迭代器</a> <a href="/tags/邮箱，域名解析/" style="font-size: 10px;">邮箱，域名解析</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://eathanq.github.io/">Eathan</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://liuxz.top/">Liuxz</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.tamarous.com/">Tamarous</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Brave</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/brave.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Brave</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">骤然临之而不惊 无故加之而不怒</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">文章</a></li>
+		        
+					<li><a href="/project">项目</a></li>
+		        
+					<li><a href="/douban">读书</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/BraveRichard" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/1817008243" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="http://Mailto:p_li@bravel.com.cn" title="mail">mail</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-关联容器" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/06/关联容器/" class="article-date">
+  	<time datetime="2016-08-06T15:22:26.000Z" itemprop="datePublished">2016-08-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关联容器
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/关联容器/">关联容器</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+	  
+  
+ 
+        <p>关联容器支持高效的关键字查找和访问。两个主要的<strong>关联容器</strong>类型是<code>map</code>和<code>set</code>。<code>map</code>中的元素是一些关键字-值（key-value）对：关键字起到索引的作用，值则表示与索引相关联的数据。<code>set</code>中每个元素只包含一个关键字，<code>set</code>支持高效的关键字查询操作–检查一个给定关键字是否存在<code>set</code>中。<br>简单来说，<code>map</code>可以理解为关键字-值对的集合，可以称为关联数组。而<code>map</code>可以理解为关键字的简单集合。当只是想知道一个值是否存在时，<code>set</code>是最有用的。<br>而在标准库中提供8个关联容器，这8个关联容器的不同主要体现在一下三个维度上：</p>
+<ol>
+<li>或者是一个<code>map</code>，或者是一个<code>set</code></li>
+<li>或者要求不重复的关键字，或者允许出现重复的关键字</li>
+<li>按顺序保存元素，或者无序保存元素。</li>
+</ol>
+<a id="more"></a>
+<p>根据这三个特征定义出的8个关联容器如下所示：</p>
+<p><strong>按关键字有序保存元素</strong>（按照关键字升序排列）</p>
+<ol>
+<li>map 关联数组，保存关键字-键对</li>
+<li>set 关键字即值，即只保存关键字容器</li>
+<li>multimap 关键字可重复出现的map</li>
+<li>multiset 关键字可重复出现的set</li>
+</ol>
+<p><strong>无序集合</strong></p>
+<ol>
+<li>unordered_map 用哈希函数组织的map</li>
+<li>unordered_set 用哈希函数组织的set</li>
+<li>unordered_multimap 用哈希函数组织的map：关键字可以重复出现</li>
+<li>unordered_multiset 用哈希函数组织的set：关键字可以重复出现</li>
+</ol>
+<p>类型map和multimap定义在头文件map中；set和multiset定义在头文件set中；无序容易则定义在头文件unordered_map和unordered_set中。</p>
+<h2 id="关联容器的使用"><a href="#关联容器的使用" class="headerlink" title="关联容器的使用"></a>关联容器的使用</h2><h3 id="使用map"><a href="#使用map" class="headerlink" title="使用map"></a>使用map</h3><p>一个经典的使用关联数组的例子就是单词计数程序<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="keyword">size_t</span>&gt; wordCount;</span><br><span class="line"><span class="built_in">string</span> word;</span><br><span class="line"><span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; word)</span><br><span class="line">    ++ wordCount[word];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;w : wordCount)</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; w.first &lt;&lt; <span class="string">" occurs "</span> &lt;&lt; w.second &lt;&lt; ((w.second &gt; <span class="number">1</span>) ? <span class="string">" times"</span> : <span class="string">" time"</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
+<p>上述是一个比较经典的使用<code>map</code>的例子，类似顺序容器，关联容器也是模板。为了定义一个<code>map</code>，我们必须指定关键字和值的类型。</p>
+<h3 id="使用set"><a href="#使用set" class="headerlink" title="使用set"></a>使用set</h3><p>根据上述程序做一个扩展，忽略常见单词，如“the”、“and”、“or”等。这个时候我们可以用<code>set</code>来存储这些关键字。具体实现如下所示：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">string</span>,size_t&gt; wordCount;</span><br><span class="line">set&lt;<span class="keyword">string</span>&gt; exculde = &#123;<span class="string">"The"</span>,<span class="string">"And"</span>,<span class="string">"Or"</span>,</span><br><span class="line">            <span class="string">"the"</span>,<span class="string">"and"</span>,<span class="string">"or"</span>&#125;;</span><br><span class="line"><span class="keyword">string</span> <span class="keyword">word</span>;</span><br><span class="line"><span class="built_in">while</span>(cin &gt;&gt; <span class="keyword">word</span>)</span><br><span class="line">    <span class="built_in">if</span>(exculde.<span class="built_in">find</span>(<span class="keyword">word</span>) == exculde.<span class="built_in">end</span>())</span><br><span class="line">        ++ wordCount[<span class="keyword">word</span>];</span><br></pre></td></tr></table></figure></p>
+<p>和<code>map</code>类似，<code>set</code>也是模板，所以为了定义一个<code>set</code>必须指定其元素类型。至于判定该元素是否在忽略字符串集合中，利用find调用之后返回的迭代器来判断，当<code>set</code>中存在这个元素时，find会返回指向这个位置的迭代器，否则，find会返回尾后迭代器。</p>
+<h2 id="关联容器概述"><a href="#关联容器概述" class="headerlink" title="关联容器概述"></a>关联容器概述</h2><p>关联容器不支持顺序容器关于位置相关的操作，比如<code>push_back</code>、<code>push_front</code>。原因是关联容器中元素是根据关键字存储的，这些操作对于关联容器是没有意义的。关联容器也不支持构造函数或插入操作这些接受一个元素值和一个数量值的操作。<br>并且关联容器迭代器都是双向的。</p>
+<p>当初始化一个<code>map</code>时，必须提供关键字类型和值类型。我们将每个关键字-值包围在花括号里，如<code>{key,value}</code>,一组键值对一起构成了<code>map</code>中的一个元素。在每个花括号中，关键字是第一个元素，值是第二个。</p>
+<h3 id="关键字类型的要求"><a href="#关键字类型的要求" class="headerlink" title="关键字类型的要求"></a>关键字类型的要求</h3><p>对于有序容器–<code>map</code>、<code>set</code>、<code>multimap</code>、<code>multiset</code>，关键字类型必须定义元素比较的方法（这样才可以实现关键字有序）。默认情况下，标准库使用关键字类型的<code>&lt;</code>运算符来比较两个关键字。在集合类型中，关键字类型就是元素类型；在映射类型中，关键字类型是元素的第一部分的类型。<br>所提供的操作必须在关键字类型上定义一个<strong>严格弱序</strong>。如果两个关键字是等价的（即，任何一方都不“小于等于”另一个），那么容器将它们视为相等来处理。当用作 <code>map</code>的关键字时，只能有一个元素与这两个关键字相关联，而且可以使用这两个关键字其中之一来访问对应的值。<br>用来组织一个容器中元素的操作的类型也是该容器类型的一部分。为了指定使用自定义的操作，必须在定义关联容器类型是提供此操作的类型。<br>举例如下所示：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compareIsbn</span><span class="params">(<span class="keyword">const</span> SalesData &amp;lhs,<span class="keyword">const</span> SalesData &amp;rhs)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    return lhs.isbn() &lt; rhs.isbn();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">multiset</span>&lt;SalesData,<span class="keyword">decltype</span>(compareIsbn)*&gt; bookstore(compareIsbn);</span><br></pre></td></tr></table></figure></p>
+<h3 id="pair-类型"><a href="#pair-类型" class="headerlink" title="pair 类型"></a>pair 类型</h3><p><code>pair</code>类型定义在头文件utility中。一个<code>pair</code>保存两个数据成员。类似容器，<code>pair</code>是一个用来生成特定类型的模板。当创建一个<code>pair</code>时，我们必须提供两个类型名，<code>pair</code>的数据成员将具有对应的类型，不过两个类型不要求一样。</p>
+<p>与其他标准库类型不同，<code>pair</code>的数据成员是<code>public</code>的。两个成员分别命名为 <code>first</code>和<code>second</code>。</p>
+<h2 id="关联容器操作"><a href="#关联容器操作" class="headerlink" title="关联容器操作"></a>关联容器操作</h2><h3 id="关联容器迭代器"><a href="#关联容器迭代器" class="headerlink" title="关联容器迭代器"></a>关联容器迭代器</h3><p>一个<code>map</code>的<code>value_type</code>是一个<code>pair</code>类型，我们可以改变<code>pair</code>的值，但不能改变关键字成员的值。迭代器在使用时，不能更改关键字的值，因为其是const的。<br><code>set</code>的迭代器是const的，迭代器只允许只读访问<code>set</code>中的元素。与不能改变一个<code>map</code>元素的关键字一样，一个<code>set</code>中的关键字也是const的。可以用一个<code>set</code>迭代器来读取元素的值，但不能修改。<br>通常我们不对关联容器使用泛型算法。关键字是const这一特性意味不能将关联容器传递给修改或重排容器元素的算法，因为这类算法需要向元素写入值，而<code>set</code>类型中的元素是const的，<code>map</code>中的元素是<code>pair</code>的，其第一个成员是const的。<br>对于关联容器我们一般进行的操作就是添加键值对或关键字，查询操作。当然，便利的操作是一种低效的查询方式，在关联容器中提供了一种查询方法<code>find</code>，这种专门为关联容器定义的<code>find</code>成员会比调用其他的方法效率高很多。</p>
+<h3 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h3><p><code>set</code>的<code>insert</code>存在两个版本，分别接受一对迭代器，或是一个初始化列表。<br><code>map</code>的<code>insert</code>，必须 记住元素类型是<code>pair</code>。通常对于要插入的数据，并没有现成的<code>pair</code>对象。可以在<code>insert</code>的参数创建一个<code>pair</code>：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wordCount.insert(&#123;<span class="keyword">word</span>,<span class="number">1</span>&#125;);</span><br><span class="line">wordCount.insert(make_pair(<span class="keyword">word</span>,<span class="number">1</span>));</span><br><span class="line">wordCount.insert(pair&lt;<span class="keyword">string</span>,size_t&gt;(<span class="keyword">word</span>,<span class="number">1</span>));</span><br><span class="line">wordCount.insert(<span class="built_in">map</span>&lt;<span class="keyword">string</span>,size_t&gt;::value_type(<span class="keyword">word</span>,<span class="number">1</span>));</span><br></pre></td></tr></table></figure></p>
+<p>关于<code>insert</code>的返回值，返回值依赖于容器类型和参数，对于<strong>不包含重复关键字</strong>的容器，添加单一元素的<code>insert</code>和<code>emplace</code>版本会返回一个<code>pair</code>，告诉我们插入操作是否成功。<code>pair</code>的first成员是一个迭代器，指向具有给定关键字的元素；second成员是一个bool值，指出元素是插入成功还是已经存在于容器中。若元素已经存在于容器中，则<code>insert</code>什么事情也不错，返回值中的bool部分为false。<br>下面举一个统计每个单词在输入中出现次数的例子：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">string</span>,size_t&gt; wordCount;</span><br><span class="line"><span class="keyword">string</span> <span class="keyword">word</span>;</span><br><span class="line"><span class="built_in">while</span>(cin &gt;&gt; <span class="keyword">word</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">auto</span> ret = wordCount.insert(&#123;<span class="keyword">word</span>,<span class="number">1</span>&#125;);</span><br><span class="line">    <span class="built_in">if</span>(!ret.second)</span><br><span class="line">        ++ ret.first-&gt;second;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述例子中，ret的类型为<code>pair&lt;map&lt;string,size_t&gt;::iterator,bool&gt; ret= wordCount.insert({word,1})</code><br>对于<strong>允许重复关键字</strong>的容器，接受单个元素的<code>insert</code>操作返回一个指向新元素的迭代器。这里无须返回一个bool值，因为每次<code>insert</code>总是向这类容器中写入一个新元素。</p>
+<h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><p>关联容器定义了三个版本的<code>erase</code>，与顺序容器一样，我们可以通过传递给<code>erase</code>一个迭代器或一个迭代器对来删除一个元素或者一个元素范围。当指定元素被删除以后返回void。<br>而关联容器提供一个额外的删除操作，它可以接受一个key_type参数。此版本删除所有匹配给定关键字的元素，返回实际删除的元素的数量。<br>所以对于保存不重复关键字的容器，<code>erase</code>的返回值总是0或1。若返回值为0，则表明想要删除的元素并不在容器里。<br>对允许重复关键字的容器，删除元素的数量可能大于1；</p>
+<h3 id="map的下标操作"><a href="#map的下标操作" class="headerlink" title="map的下标操作"></a>map的下标操作</h3><p><code>map</code>和<code>unordered_map</code>容器提供了下标运算符和一个对应的at函数。<code>set</code>不支持下标操作，因为<code>set</code>中没有与关键字相关联的值。并且也不能对<code>multimap</code>或一个<code>unordered_multimap</code>进行下标操作，因为这些容器中可能有多个值与一个关键字想关联。<br><strong>下标运算符，如果此关键字不在<code>map</code>中，会为它创建一个元素并插入到<code>map</code>中。</strong><br><code>at</code>函数，访问关键字对应的元素，并带有参数检查，若关键字不在关联容器中，会抛出一个out_of_range异常。<br>至于返回值，需要重点关注一下返回值的类型，当对<code>map</code>进行下标操作时，会获得一个<code>mapped_type</code>对象；但当解引用一个<code>map</code>迭代器时，会得到一个<code>value_type</code>对象。</p>
+<h3 id="访问元素"><a href="#访问元素" class="headerlink" title="访问元素"></a>访问元素</h3><p>关联容器提供多种查找一个指定元素的方法。如果我们只是关心一个特定元素是否包含在容器中，<code>find</code>是最好的选择。对于不允许重复关键字的容器，可能使用<code>find</code>还是<code>count</code>并没有什么区别，但对于允许重复关键字的容器，<code>count</code>还会做更多的工作：如果关键字在容器中，还会统计关键字出现的次数，而<code>find</code>不会做这个操作。<br><code>find</code>会返回一个迭代器，指向关键字对应的元素，若关键字不在容器中，则返回尾后迭代器。<br><code>count</code>会返回关键字等于关键字的元素的数量，对于不允许重复关键字的容器，返回值永远是0和1。<br><code>c.lower_bound(k)</code>返回一个迭代器，指向第一个关键字不小于k的元素。<br><code>c.upper_bound(k)</code>返回一个迭代器，指向第一个关键字大于k的元素。<br><code>c.equal_range(k)</code>返回一个迭代器<code>pair</code>，表示关键字等于k的元素的范围。若k不存在，<code>pair</code>的两个成员均等于c.end();</p>
+<p>对<code>map</code>和<code>unordered_map</code>类型，下标运算符提供了最简单的提取元素的方法。但是如我们所见，使用下标操作有一个非常严重的副作用：如果关键字在<code>map</code>中不存在，下标操作会插入一个具有给定关键字的元素。这种行为有时候会引来错误。所以当我们只是想知道一个给定关键字是否存在与<code>map</code>中，而不想改变<code>map</code>。这样就不能使用下标运算符来检查一个元素是否存在。<br>在<code>multimap</code>或<code>multiset</code>中查找元素，如果其中多个元素具有给定的关键字，则这些元素在容器中会相邻存储。<br>对于提取出这些相同的元素有三种思路，具体如下：</p>
+<ol>
+<li>利用<code>count</code>返回这个关键字对应的元素的数目，利用<code>find</code>函数返回关键字对应的第一个元素的迭代器。</li>
+<li>可以借用<code>upper_bound</code>和<code>lower_bound</code>的返回迭代器来确定相同元素的范围，如果返回相同的迭代器，则给定的关键字不在容器中。</li>
+<li>直接调用<code>equal_range</code>函数，返回一个迭代器<code>pair</code>，若关键字存在，则第一个迭代器指向第一个与关键字匹配的元素，第二个关键字指向最后一个匹配元素之后的位置。若未找到匹配元素，则两个迭代器都指向关键字可以插入的位置。即两个迭代器是相等的。</li>
+</ol>
+<h3 id="一个关于单词转换的map"><a href="#一个关于单词转换的map" class="headerlink" title="一个关于单词转换的map"></a>一个关于单词转换的map</h3><p>在最后举一个应用之前所学的例子，具体程序功能如下所示：</p>
+<blockquote>
+<p>给定一个string，将它转换为另一个string。程序的输入是两个文件。第一个保存的是一些规则，用来转换第二个文件中的文本。每条规则由两部分组成：一个可能出现在输入文件中的单词和一个用来替代它的词语。表达的含义是，每当第一个单词在输入中时，我们就将它替代为对应的短语。第二个输入文本包含要转换的文本。</p>
+</blockquote>
+<p>具体实现代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; bulidMap(ifstream &amp;mapFile)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; transMap;</span><br><span class="line">    <span class="built_in">string</span> key;</span><br><span class="line">    <span class="built_in">string</span> value;</span><br><span class="line">    <span class="keyword">while</span> (mapFile &gt;&gt; key &amp;&amp; getline(mapFile, value))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (value.size() &gt; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            transMap[key] = value.substr(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return transMap;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="built_in">string</span> &amp; <span class="title">transform</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s, <span class="keyword">const</span> <span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; &amp;m)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> mapIt = m.find(s);</span><br><span class="line">    <span class="keyword">if</span> (mapIt != m.cend())</span><br><span class="line">        return mapIt-&gt;second;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        return s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wordTransform</span><span class="params">(ifstream &amp;mapfile, ifstream &amp;input)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> transMap = bulidMap(mapfile);</span><br><span class="line">    <span class="built_in">string</span> text;</span><br><span class="line">    <span class="keyword">while</span> (getline(input, text))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="built_in">istringstream</span> <span class="title">strm</span><span class="params">(text)</span></span>;</span><br><span class="line">        <span class="built_in">string</span> word;</span><br><span class="line">        <span class="keyword">bool</span> firstWord = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">while</span> (strm &gt;&gt; word)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (firstWord)</span><br><span class="line">            &#123;</span><br><span class="line">                firstWord = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; transform(word, transMap);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">ifstream <span class="title">input</span><span class="params">(<span class="string">"input.txt"</span>,<span class="built_in">std</span>::ifstream::in)</span></span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">ifstream <span class="title">replace</span><span class="params">(<span class="string">"replace.txt"</span>,<span class="built_in">std</span>::ifstream::in)</span></span>;</span><br><span class="line">    wordTransform(replace, input);</span><br><span class="line"></span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="无序容器"><a href="#无序容器" class="headerlink" title="无序容器"></a>无序容器</h2><p>在新标准中定义了4个<strong>无序容器</strong>，这些容器不是使用比较运算符来组织元素的，而是使用了一个<strong>哈希函数</strong>和关键字类型的<code>==</code>运算符。</p>
+<h3 id="管理桶"><a href="#管理桶" class="headerlink" title="管理桶"></a>管理桶</h3><p>无序容器在存储上组织为一组桶，每个桶保存零个或多个元素。无序容器使用一个哈希函数将元素映射到桶。如果容器允许重复关键字，所有具有相同关键字的元素都会在同一个桶里。因此，无序容器的性能依赖于哈希函数的质量和桶的数量和大小。</p>
+<p>理想情况下，哈希函数将每个特定的映射到唯一的桶。但是，将不同关键字的元素映射到相同的桶也是允许的。当一个桶保存多个元素时，需要顺序搜索这些元素来查找我们想要的元素。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/01/迭代器/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">迭代器</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="关联容器" data-title="关联容器" data-url="http://blog.bravel.com.cn/2016/08/06/关联容器/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"braverichard"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Brave
+    	</div>
+		<span id="busuanzi_container_site_pv">
+		本站总访问量<span id="busuanzi_value_site_pv"></span>次
+		</span>
+		<span id="busuanzi_container_page_pv">
+		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+		<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+		</script>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+<script src="/js/totop.js"></script>
+  </div>
+</body>
+</html>
