@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Linux调试技术之内存泄露 | Brave&#39;s Blog</title>
+  <title>CPP中成员对象选择操作符和成员指针选择符 | Brave&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文主要讨论在Linux系统下关于出现内存泄露的调试方法，主要使用内存调试工具memwatch 和yet another malloc debugger(YAMD)来进行调试。主要针对内存泄露问题来进行研究。">
+  <meta name="description" content="C++中支持仅能指向类成员的指针，对这种类型的指针进行数据的提取操作时，可使用如下两种类型的操作符：成员对象选择操作符.*和成员指针选择符-&amp;gt;*下面来具体举例子说明这两种用法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux调试技术之内存泄露">
-<meta property="og:url" content="http://blog.bravel.com.cn/2016/07/20/Linux调试技术之内存泄露/index.html">
+<meta property="og:title" content="CPP中成员对象选择操作符和成员指针选择符">
+<meta property="og:url" content="http://blog.bravel.com.cn/2016/09/09/CPP中成员对象选择操作符和成员指针选择符/index.html">
 <meta property="og:site_name" content="Brave's Blog">
-<meta property="og:description" content="本文主要讨论在Linux系统下关于出现内存泄露的调试方法，主要使用内存调试工具memwatch 和yet another malloc debugger(YAMD)来进行调试。主要针对内存泄露问题来进行研究。">
-<meta property="og:updated_time" content="2016-07-20T12:48:50.600Z">
+<meta property="og:description" content="C++中支持仅能指向类成员的指针，对这种类型的指针进行数据的提取操作时，可使用如下两种类型的操作符：成员对象选择操作符.*和成员指针选择符-&amp;gt;*下面来具体举例子说明这两种用法。">
+<meta property="og:updated_time" content="2017-03-09T01:50:21.421Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux调试技术之内存泄露">
-<meta name="twitter:description" content="本文主要讨论在Linux系统下关于出现内存泄露的调试方法，主要使用内存调试工具memwatch 和yet another malloc debugger(YAMD)来进行调试。主要针对内存泄露问题来进行研究。">
+<meta name="twitter:title" content="CPP中成员对象选择操作符和成员指针选择符">
+<meta name="twitter:description" content="C++中支持仅能指向类成员的指针，对这种类型的指针进行数据的提取操作时，可使用如下两种类型的操作符：成员对象选择操作符.*和成员指针选择符-&amp;gt;*下面来具体举例子说明这两种用法。">
   
   
     <link rel="icon" href="/img/redhead.jpg">
@@ -192,11 +192,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-Linux调试技术之内存泄露" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-CPP中成员对象选择操作符和成员指针选择符" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/20/Linux调试技术之内存泄露/" class="article-date">
-  	<time datetime="2016-07-20T06:50:47.000Z" itemprop="datePublished">2016-07-20</time>
+      <a href="/2016/09/09/CPP中成员对象选择操作符和成员指针选择符/" class="article-date">
+  	<time datetime="2016-09-09T01:48:25.000Z" itemprop="datePublished">2016-09-09</time>
 </a>
     </div>
   
@@ -209,7 +209,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Linux调试技术之内存泄露
+      CPP中成员对象选择操作符和成员指针选择符
     </h1>
   
 
@@ -218,7 +218,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内存泄露/">内存泄露</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/指针/">指针</a></li></ul>
 	</div>
 
         
@@ -232,7 +232,12 @@
 	  
   
  
-        <p>本文主要讨论在Linux系统下关于出现内存泄露的调试方法，主要使用内存调试工具memwatch 和yet another malloc debugger(YAMD)来进行调试。主要针对内存泄露问题来进行研究。<br><a id="more"></a></p>
+        <p>C++中支持仅能指向类成员的指针，对这种类型的指针进行数据的提取操作时，可使用如下两种类型的操作符：成员对象选择操作符<code>.*</code>和成员指针选择符<code>-&gt;*</code>下面来具体举例子说明这两种用法。<br><a id="more"></a></p>
+<h2 id="成员对象选择操作符"><a href="#成员对象选择操作符" class="headerlink" title="成员对象选择操作符   .*"></a>成员对象选择操作符   .*</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> demo</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">float</span> z = <span class="number">0.0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> f;</span><br><span class="line">    demo d1, d2;</span><br><span class="line">    <span class="keyword">int</span> demo::*iPtr;<span class="comment">//a pointer of a int member in class of demo</span></span><br><span class="line">    iPtr = &amp;demo::x;<span class="comment">//point to demo member x</span></span><br><span class="line">    d1.*iPtr = <span class="number">4</span>;<span class="comment">//set d1.x = 4</span></span><br><span class="line">    d2.*iPtr = <span class="number">3</span>;<span class="comment">//set d2.x = 3</span></span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="成员指针选择符-gt"><a href="#成员指针选择符-gt" class="headerlink" title="成员指针选择符   -&gt;*"></a>成员指针选择符   -&gt;*</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> demo</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">()</span> </span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"in f"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        return <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    demo d1;</span><br><span class="line">    demo * ptr = &amp;d1;</span><br><span class="line">    <span class="keyword">int</span> (demo::*fPtr) ();</span><br><span class="line">    fPtr = &amp;demo::f;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; (ptr-&gt;*fPtr)();</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><a href="https://zh.wikipedia.org/wiki/C%E5%92%8CC%2B%2B%E9%81%8B%E7%AE%97%E5%AD%90" target="_blank" rel="external">C和C++运算符</a></li>
+</ol>
 
       
     </div>
@@ -242,18 +247,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/07/20/Linux调试技术之gdb的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/03/07/产生一个随机数/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Linux调试技术之gdb的使用
+          产生一个随机数
         
       </div>
     </a>
   
   
-    <a href="/2016/06/01/利用网易企业邮设置自己域名下的邮箱/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">利用网易企业邮设置自己域名下的邮箱</div>
+    <a href="/2016/08/06/关联容器/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关联容器</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -288,7 +293,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Linux调试技术之内存泄露" data-title="Linux调试技术之内存泄露" data-url="http://blog.bravel.com.cn/2016/07/20/Linux调试技术之内存泄露/"></div>
+	<div class="ds-thread" data-thread-key="CPP中成员对象选择操作符和成员指针选择符" data-title="CPP中成员对象选择操作符和成员指针选择符" data-url="http://blog.bravel.com.cn/2016/09/09/CPP中成员对象选择操作符和成员指针选择符/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
