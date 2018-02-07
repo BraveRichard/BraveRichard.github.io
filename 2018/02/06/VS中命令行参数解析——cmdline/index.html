@@ -6,39 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.bravel.com.cn">
-  <title>About | Brave&#39;s Blog</title>
+  <title>VS中命令行参数解析——cmdline | Brave&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Emailp_li@bravel.com.cn
-Education2015 至今，西安电子科技大学，硕士，通信与信息系统2011 - 2015，西安电子科技大学，本科，通信工程
-Work Experiences西安迪威码半导体公司 
-
-时间 ： 2015.07 - 2016.02
-职位 ： IC研发工程师
-工具 ： Verilog、Novas
-主要职责 ： 负责H.265视频编码算法帧内预测编码部">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About">
-<meta property="og:url" content="http://blog.bravel.com.cn/about/index.html">
+  <meta name="description" content="在视频编码领域中，当需要利用批处理进行大规模的性能测试时，利用命令行参数传参是一个常出现的传参方法。笔者在之前的开发过程中，总是用自己写的简易版本来进行参数解析，非常粗鲁并且繁琐且容易出错。恰好最近要实现一个功能，其中第一步就需要进行命令行参数的解析，这次去github搜索了一下，找到了一个非常轻量级并且经笔者测试可以满足需求的一个开源项目。本文主要介绍这个项目的使用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VS中命令行参数解析——cmdline">
+<meta property="og:url" content="http://blog.bravel.com.cn/2018/02/06/VS中命令行参数解析——cmdline/index.html">
 <meta property="og:site_name" content="Brave's Blog">
-<meta property="og:description" content="Emailp_li@bravel.com.cn
-Education2015 至今，西安电子科技大学，硕士，通信与信息系统2011 - 2015，西安电子科技大学，本科，通信工程
-Work Experiences西安迪威码半导体公司 
-
-时间 ： 2015.07 - 2016.02
-职位 ： IC研发工程师
-工具 ： Verilog、Novas
-主要职责 ： 负责H.265视频编码算法帧内预测编码部">
-<meta property="og:updated_time" content="2016-07-17T09:21:13.010Z">
+<meta property="og:description" content="在视频编码领域中，当需要利用批处理进行大规模的性能测试时，利用命令行参数传参是一个常出现的传参方法。笔者在之前的开发过程中，总是用自己写的简易版本来进行参数解析，非常粗鲁并且繁琐且容易出错。恰好最近要实现一个功能，其中第一步就需要进行命令行参数的解析，这次去github搜索了一下，找到了一个非常轻量级并且经笔者测试可以满足需求的一个开源项目。本文主要介绍这个项目的使用。">
+<meta property="og:updated_time" content="2018-02-07T03:30:03.897Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About">
-<meta name="twitter:description" content="Emailp_li@bravel.com.cn
-Education2015 至今，西安电子科技大学，硕士，通信与信息系统2011 - 2015，西安电子科技大学，本科，通信工程
-Work Experiences西安迪威码半导体公司 
-
-时间 ： 2015.07 - 2016.02
-职位 ： IC研发工程师
-工具 ： Verilog、Novas
-主要职责 ： 负责H.265视频编码算法帧内预测编码部">
+<meta name="twitter:title" content="VS中命令行参数解析——cmdline">
+<meta name="twitter:description" content="在视频编码领域中，当需要利用批处理进行大规模的性能测试时，利用命令行参数传参是一个常出现的传参方法。笔者在之前的开发过程中，总是用自己写的简易版本来进行参数解析，非常粗鲁并且繁琐且容易出错。恰好最近要实现一个功能，其中第一步就需要进行命令行参数的解析，这次去github搜索了一下，找到了一个非常轻量级并且经笔者测试可以满足需求的一个开源项目。本文主要介绍这个项目的使用。">
   
   
     <link rel="icon" href="/img/redhead.jpg">
@@ -207,35 +186,39 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-undefined" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-VS中命令行参数解析——cmdline" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      About
+      VS中命令行参数解析——cmdline
     </h1>
   
 
         
-        <a href="/about/index.html" class="archive-article-date">
-  	<time datetime="2016-04-15T09:41:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-15</time>
+        <a href="/2018/02/06/VS中命令行参数解析——cmdline/" class="archive-article-date">
+  	<time datetime="2018-02-06T12:00:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Email"><a href="#Email" class="headerlink" title="Email"></a>Email</h2><p>p_li@bravel.com.cn</p>
-<h2 id="Education"><a href="#Education" class="headerlink" title="Education"></a>Education</h2><p>2015 至今，西安电子科技大学，硕士，通信与信息系统<br>2011 - 2015，西安电子科技大学，本科，通信工程</p>
-<h2 id="Work-Experiences"><a href="#Work-Experiences" class="headerlink" title="Work Experiences"></a>Work Experiences</h2><p><strong>西安迪威码半导体公司</strong> </p>
-<ul>
-<li>时间 ： 2015.07 - 2016.02</li>
-<li>职位 ： IC研发工程师</li>
-<li>工具 ： Verilog、Novas</li>
-<li>主要职责 ： 负责H.265视频编码算法帧内预测编码部分Verilog的实现</li>
-</ul>
+        <p>在视频编码领域中，当需要利用批处理进行大规模的性能测试时，利用命令行参数传参是一个常出现的传参方法。笔者在之前的开发过程中，总是用自己写的简易版本来进行参数解析，非常粗鲁并且繁琐且容易出错。恰好最近要实现一个功能，其中第一步就需要进行命令行参数的解析，这次去github搜索了一下，找到了一个非常轻量级并且经笔者测试可以满足需求的一个开源项目。本文主要介绍这个项目的使用。<br><a id="more"></a></p>
+<h2 id="cmdline介绍"><a href="#cmdline介绍" class="headerlink" title="cmdline介绍"></a>cmdline介绍</h2><p>这个项目的是基于C++实现，用了大量的模板来解决需求，所以写出来的代码非常的优雅美观。贴出cmdline项目的开源地址：<a href="https://github.com/tanakh/cmdline" target="_blank" rel="external">cmdline</a></p>
+<h2 id="cmdline使用"><a href="#cmdline使用" class="headerlink" title="cmdline使用"></a>cmdline使用</h2><p>首先需要clone下来这个项目，在自己开发的项目里面包含cmdline项目中的<code>cmdline.h</code>这个头文件。<br>根据项目中的readme说明就可以使用这个开源库了。<br>汉语版本可以参考<a href="http://blog.csdn.net/xiaohui_hubei/article/details/40479811" target="_blank" rel="external">【C++】cmdline —— 轻量级的C++命令行解析库</a></p>
+<h2 id="VS下的cmdline"><a href="#VS下的cmdline" class="headerlink" title="VS下的cmdline"></a>VS下的cmdline</h2><p>由于笔者的开发环境为Windows+VS，在包含头文件进来之后发现编译并不能顺利通过，提示缺少头文件<code>cxxabi.h</code>，而这个头文件是MSVC中不包含的。<br>注释掉头文件<code>cxxabi.h</code>的包含之后，发现只有一个错误。函数具体如下所示<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">demangle</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;name)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> status=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">char</span> *p=abi::__cxa_demangle(name.c_str(), <span class="number">0</span>, <span class="number">0</span>, &amp;status);<span class="comment">//用到cxxabi.h中的函数</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">ret</span><span class="params">(p)</span></span>;</span><br><span class="line">  <span class="built_in">free</span>(p);</span><br><span class="line">  return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个是因为MSVC和其他编译器的差别造成，修改方法如下</p>
+<ol>
+<li>头文件包含部分检测</li>
+</ol>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当编译器不是gcc时,不包含cxxabi.h头文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __GNUC__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cxxabi.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>修改函数<code>static inline std::string demangle(const std::string &amp;name)</code>如下所示<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">demangle</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;name)</span></span><br><span class="line"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _MSC_VER</span></span><br><span class="line">  <span class="comment">// 为MSVC编译器时直接返回name</span></span><br><span class="line">  return name; </span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined(__GNUC__) </span></span><br><span class="line">  <span class="comment">// 为gcc编译器时还调用原来的代码</span></span><br><span class="line">  <span class="keyword">int</span> status=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">char</span> *p=abi::__cxa_demangle(name.c_str(), <span class="number">0</span>, <span class="number">0</span>, &amp;status);</span><br><span class="line">  <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">ret</span><span class="params">(p)</span></span>;</span><br><span class="line">  <span class="built_in">free</span>(p);</span><br><span class="line">  return ret;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  <span class="comment">// 其他没有cmdline.h的编译器需要自己实现这个方法</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
 
@@ -275,6 +258,21 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">命令行解析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -325,7 +323,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.bravel.com.cn/about/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.bravel.com.cn/2018/02/06/VS中命令行参数解析——cmdline/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -337,6 +335,16 @@ var _hmt = _hmt || [];
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/07/产生一个随机数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">产生一个随机数</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -412,7 +420,7 @@ new Valine({
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
